@@ -1,3 +1,4 @@
+import type { SectionProps } from '@/components/Section';
 import {
   IconArrowsMaximize,
   IconArrowsMinimize,
@@ -8,7 +9,7 @@ import {
   IconVideo,
 } from '@tabler/icons-react';
 
-export const sections = [
+export const sections: SectionProps[] = [
   {
     title: 'Crop',
     description:

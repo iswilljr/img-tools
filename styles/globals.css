@@ -4,6 +4,6 @@
 
 @layer base {
   body {
-    @apply overflow-x-hidden bg-[#0d1117] text-white;
+    @apply overflow-x-hidden bg-dark-11 text-white;
   }
 }
