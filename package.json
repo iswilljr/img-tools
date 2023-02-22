@@ -1,0 +1,50 @@
+{
+  "name": "img-tools",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint --fix .",
+    "format": "prettier -wu .",
+    "check": "npm run format:check && npm run lint:check",
+    "lint:check": "eslint .",
+    "format:check": "prettier -cu .",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@next/font": "13.1.6",
+    "next": "13.1.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "18.14.0",
+    "@types/react": "18.0.28",
+    "@typescript-eslint/eslint-plugin": "5.53.0",
+    "autoprefixer": "10.4.13",
+    "eslint": "8.34.0",
+    "eslint-config-next": "13.1.6",
+    "eslint-config-prettier": "8.6.0",
+    "eslint-config-standard": "17.0.0",
+    "eslint-config-standard-with-typescript": "34.0.0",
+    "eslint-plugin-import": "2.27.5",
+    "eslint-plugin-n": "15.6.1",
+    "eslint-plugin-prettier": "4.2.1",
+    "eslint-plugin-promise": "6.1.1",
+    "eslint-plugin-react": "7.32.2",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "husky": "8.0.3",
+    "lint-staged": "13.1.2",
+    "postcss": "8.4.21",
+    "prettier": "2.8.4",
+    "prettier-plugin-tailwindcss": "0.2.3",
+    "tailwindcss": "3.2.7",
+    "typescript": "4.9.5"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "npx eslint --fix",
+    "*.{json,js,jsx,ts,tsx,md,css}": "npx prettier -w"
+  }
+}
