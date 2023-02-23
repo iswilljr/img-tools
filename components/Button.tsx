@@ -1,10 +1,12 @@
 import clsx from 'clsx';
+import { IconLoader } from '@tabler/icons-react';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'dark';
+  loading?: boolean;
 }
 
-export function Button({ variant = 'primary', className, ...props }: ButtonProps) {
+export function Button({ variant = 'primary', className, loading, ...props }: ButtonProps) {
   return (
     <button
       {...props}
@@ -16,6 +18,13 @@ export function Button({ variant = 'primary', className, ...props }: ButtonProps
           'border-gray-700 bg-dark-8 disabled:bg-dark-8/50': variant === 'dark',
         }
       )}
-    />
+    >
+      {props.children}
+      {loading && (
+        <span className="ml-2 animate-spin">
+          <IconLoader />
+        </span>
+      )}
+    </button>
   );
 }

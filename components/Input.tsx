@@ -2,7 +2,7 @@ import clsx from 'clsx';
 
 interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'id'> {
   id: string;
-  label: string;
+  label: React.ReactNode;
 }
 
 export function Input({ className, label, ...props }: InputProps) {
