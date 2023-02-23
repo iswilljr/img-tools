@@ -14,6 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <div className={inter.className}>
       <Head>
         <title>Image Tools</title>
+        <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
       </Head>
       <Header />
       <main className="min-h-[calc(100vh-64px)]">
