@@ -20,7 +20,7 @@ export default function CropEditor({ url, width, height }: CropProps) {
   const [rotating, setRotating] = useState(false);
   const [context, setContext] = useState<CanvasRenderingContext2D>();
   const [degrees, setDegrees] = useState(0);
-  const [horizantallyFlipped, setHorizantallyFlipped] = useState(false);
+  const [horizontallyFlipped, setHorizontallyFlipped] = useState(false);
   const [verticallyFlipped, setVerticallyFlipped] = useState(false);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function CropEditor({ url, width, height }: CropProps) {
 
     const positionX = -width / 2;
     const positionY = -height / 2;
-    const scaleX = horizantallyFlipped ? -1 : 1;
+    const scaleX = horizontallyFlipped ? -1 : 1;
     const scaleY = verticallyFlipped ? -1 : 1;
 
     context.clearRect(0, 0, width, height);
@@ -56,7 +56,7 @@ export default function CropEditor({ url, width, height }: CropProps) {
     context.translate(-positionX - width / 2, -positionY - height / 2);
     context.drawImage(imageRef.current, positionX, positionY, width, height);
     context.restore();
-  }, [context, degrees, horizantallyFlipped, verticallyFlipped, width, height]);
+  }, [context, degrees, horizontallyFlipped, verticallyFlipped, width, height]);
 
   return (
     <div className="flex flex-col sm:h-[calc(100vh-64px)] sm:flex-row">
@@ -65,7 +65,7 @@ export default function CropEditor({ url, width, height }: CropProps) {
           className="flex w-full flex-col justify-between px-6 pt-6 text-white sm:h-full"
           onReset={() => {
             setVerticallyFlipped(false);
-            setHorizantallyFlipped(false);
+            setHorizontallyFlipped(false);
             setDegrees(0);
           }}
           onSubmit={e => {
@@ -106,13 +106,13 @@ export default function CropEditor({ url, width, height }: CropProps) {
                 name="horizontally"
                 id="horizontally"
                 hidden
-                checked={horizantallyFlipped}
+                checked={horizontallyFlipped}
                 readOnly
                 label={
                   <Button
                     variant="dark"
                     type="button"
-                    onClick={() => setHorizantallyFlipped(o => !o)}
+                    onClick={() => setHorizontallyFlipped(o => !o)}
                     disabled={rotating}
                   >
                     Horizontally

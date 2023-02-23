@@ -20,7 +20,7 @@ export function Dropzone({ accept, onFileAccepted }: DropzoneProps) {
       setError('');
       setLoading(true);
       onFileAccepted(files[0])
-        .catch(() => setError('Somethin went wrong'))
+        .catch(() => setError('Something went wrong'))
         .finally(() => setLoading(false));
     },
   });
