@@ -1,7 +1,7 @@
 import { Highlight } from './Highlight';
 import { Shadow } from './Shadow';
 
-interface SectionInfoProps {
+export interface SectionInfoProps {
   title: string;
   description: string;
   highlight: string;

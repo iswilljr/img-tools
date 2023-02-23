@@ -3,7 +3,7 @@ import { IconLoader, IconUpload } from '@tabler/icons-react';
 import { useDropzone, type Accept } from 'react-dropzone';
 import { useState } from 'react';
 
-interface DropzoneProps {
+export interface DropzoneProps {
   accept: Accept;
   onFileAccepted: (file: File) => Promise<void>;
 }
@@ -30,7 +30,7 @@ export function Dropzone({ accept, onFileAccepted }: DropzoneProps) {
       <div className="relative rounded-lg bg-gradient-to-r from-primary-8 to-secondary-8 bg-cover p-2">
         <div
           className={clsx('pointer-events-none absolute inset-0 z-10 flex items-center justify-center rounded-lg', {
-            'bg-white/60': loading,
+            'bg-white/40': loading,
             'bg-green-600/40': !isDragReject && isDragActive,
             'bg-red-600/40': isDragReject,
           })}
