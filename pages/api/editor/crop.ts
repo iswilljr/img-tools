@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const resource = await getResourceFromPublicId(publicId);
 
-    const croppedImageUrl = cloudinary.url(resource.public_id, {
+    const croppedImageUrl = cloudinary.url(resource.publicId, {
       crop: 'crop',
       width: Math.round(width),
       height: Math.round(height),
