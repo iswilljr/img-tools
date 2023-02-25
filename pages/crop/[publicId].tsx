@@ -56,7 +56,7 @@ export default function CropEditor({ url, width, height, publicId }: CropProps) 
             <div>
               <h2 className="text-2xl font-semibold">Crop Rectangle</h2>
               <Input id="width" label="Width" type="number" value={crop.width} {...inputProps} />
-              <Input id="height" label="height" type="number" value={crop.height} {...inputProps} />
+              <Input id="height" label="Height" type="number" value={crop.height} {...inputProps} />
             </div>
             <div className="mt-5">
               <h2 className="text-2xl font-semibold">Crop Position</h2>

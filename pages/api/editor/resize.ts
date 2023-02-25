@@ -7,16 +7,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).end();
   }
 
-  const { publicId, quality } = req.body;
+  const { publicId, color, width, height } = req.body;
 
   try {
-    if (typeof publicId !== 'string') throw Error('Invalid publicId param');
-    if (typeof quality !== 'number') throw Error('Invalid quality param');
+    if (typeof publicId !== 'string' || typeof color !== 'string') {
+      throw Error('Invalid publicId or color param to be type string');
+    }
+
+    if (typeof width !== 'number' || typeof height !== 'number') {
+      throw Error('Invalid width or height param to be type number');
+    }
 
     const resource = await getResourceFromPublicId(publicId);
 
     const compressedImageUrl = cloudinary.url(resource.publicId, {
-      quality,
+      crop: 'pad',
+      background: `rgb:${color.replace('#', '')}`,
+      width,
+      height,
     });
 
     const img = await cloudinary.uploader.upload(compressedImageUrl);
