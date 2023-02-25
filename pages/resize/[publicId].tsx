@@ -166,7 +166,7 @@ export default function CropEditor({ url, width: initialWidth, height: initialHe
         </form>
       </section>
       <section className="relative flex h-full w-full items-center justify-center p-6">
-        <Image priority width={initialWidth} height={initialHeight} ref={imgRef} alt="Crop me" src={url} />
+        <Image priority width={initialWidth} height={initialHeight} ref={imgRef} alt="Resize me" src={url} />
       </section>
     </div>
   );
