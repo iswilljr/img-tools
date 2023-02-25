@@ -22,7 +22,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-dropzone": "14.2.3",
-    "react-image-crop": "10.0.9"
+    "react-image-crop": "10.0.9",
+    "use-debounce": "9.0.3"
   },
   "devDependencies": {
     "@tailwindcss/forms": "0.5.3",

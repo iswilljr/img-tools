@@ -7,7 +7,7 @@ interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, '
 
 export function Input({ className, label, ...props }: InputProps) {
   return (
-    <div className="mt-2">
+    <div className="group relative mt-2">
       <label className="text-md" htmlFor={props.name ?? props.id}>
         {label}
       </label>
