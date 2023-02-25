@@ -3,18 +3,24 @@ interface UploadResponse {
   url: string;
 }
 
-export const uploadFile = (file: File) => {
-  return new Promise<UploadResponse>((resolve, reject) => {
+export const readFile = (file: File) => {
+  return new Promise<string>((resolve, reject) => {
     const reader = new FileReader();
 
     reader.addEventListener('load', () => {
       const url = reader.result?.toString() ?? '';
 
-      upload(url).then(resolve).catch(reject);
+      resolve(url);
     });
+
+    reader.addEventListener('error', reject);
 
     reader.readAsDataURL(file);
   });
+};
+
+export const uploadFile = (file: File) => {
+  return readFile(file).then(upload);
 };
 
 export const upload = (dataUrl: string): Promise<UploadResponse> => {
