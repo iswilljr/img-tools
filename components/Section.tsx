@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import { Shadow } from './Shadow';
 import { Highlight } from './Highlight';
 import type { TablerIconsProps } from '@tabler/icons-react';
@@ -10,18 +9,12 @@ export interface SectionProps {
   label: string;
   icon: (props: TablerIconsProps) => JSX.Element;
   tryItOut: string;
-  reversed?: boolean;
 }
 
-export function Section({ title, description, icon: Icon, tryItOut, reversed }: SectionProps) {
+export function Section({ title, description, icon: Icon, tryItOut }: SectionProps) {
   return (
     <section className="relative px-6">
-      <div
-        className={clsx('mx-auto flex max-w-md flex-col items-center justify-between gap-4 sm:max-w-4xl', {
-          'lg:flex-row': !reversed,
-          'lg:flex-row-reverse': reversed,
-        })}
-      >
+      <div className="mx-auto flex max-w-md flex-col items-center justify-between gap-4 sm:max-w-4xl odd:lg:flex-row-reverse even:lg:flex-row">
         <Link className="group relative w-full border-b border-gray-700" href={tryItOut}>
           <Highlight
             as="h2"

@@ -17,7 +17,7 @@ export default function Home() {
       </section>
       <div className="mx-auto w-fit [&>section]:mb-28 [&>section]:md:mb-36">
         {sections.map((section, i) => (
-          <Section key={section.title} {...section} reversed={i % 2 !== 0} />
+          <Section key={section.title} {...section} />
         ))}
       </div>
     </div>
