@@ -87,7 +87,6 @@ export default function CropEditor({ url, width, height }: CropProps) {
             <div>
               <h2 className="text-2xl font-semibold">Rotate Image</h2>
               <Input
-                className="px-0"
                 id="degrees"
                 label="Degrees"
                 type="range"
