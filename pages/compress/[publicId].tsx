@@ -77,6 +77,7 @@ export default function CropEditor({ url, width, height, publicId }: CropProps) 
                 id="format"
                 value={format}
                 onChange={e => setFormat(e.target.value)}
+                disabled={compressing}
               >
                 <option value="png">PNG</option>
                 <option value="jpg">JPG</option>
