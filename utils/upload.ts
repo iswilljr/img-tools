@@ -1,7 +1,4 @@
-interface UploadResponse {
-  publicId: string;
-  url: string;
-}
+import axios from 'redaxios';
 
 export const readFile = (file: File) => {
   return new Promise<string>((resolve, reject) => {
@@ -23,10 +20,6 @@ export const uploadFile = (file: File) => {
   return readFile(file).then(upload);
 };
 
-export const upload = (dataUrl: string): Promise<UploadResponse> => {
-  return fetch('/api/upload', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ data: dataUrl }),
-  }).then(res => res.json());
+export const upload = (dataUrl: string): Promise<BaseResponse> => {
+  return axios.post('/api/upload', { data: dataUrl }).then(res => res.data);
 };

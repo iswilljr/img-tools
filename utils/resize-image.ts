@@ -1,19 +1,12 @@
-interface Options {
+import axios from 'redaxios';
+
+interface Body {
   publicId: string;
   width: number;
   height: number;
   color: string;
 }
 
-interface ResizeResponse {
-  publicId: string;
-  url: string;
-}
-
-export const resizeImage = (options: Options): Promise<ResizeResponse> => {
-  return fetch('/api/editor/resize', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(options),
-  }).then(res => res.json());
+export const resizeImage = (body: Body): Promise<BaseResponse> => {
+  return axios.post('/api/editor/resize', body).then(res => res.data);
 };

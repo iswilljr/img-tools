@@ -1,18 +1,11 @@
-interface Options {
+import axios from 'redaxios';
+
+interface CompressBody {
   publicId: string;
   quality: number;
   format: string;
 }
 
-interface CompressResponse {
-  publicId: string;
-  url: string;
-}
-
-export const compressImage = (options: Options): Promise<CompressResponse> => {
-  return fetch('/api/editor/compress', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(options),
-  }).then(res => res.json());
+export const compressImage = (body: CompressBody): Promise<BaseResponse> => {
+  return axios.post('/api/editor/compress', body).then(res => res.data);
 };
