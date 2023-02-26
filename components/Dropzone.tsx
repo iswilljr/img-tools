@@ -39,11 +39,11 @@ export function Dropzone({ accept, onFileAccepted }: DropzoneProps) {
 
   return (
     <section className="mx-auto mb-10 w-full px-6 text-center sm:max-w-4xl">
-      <div className="relative rounded-lg bg-gradient-to-r from-primary-8 to-secondary-8 bg-cover p-2">
+      <div className="relative rounded-lg bg-gradient-to-br from-primary-6 to-primary-8 bg-cover p-2">
         <div
           className={clsx('pointer-events-none absolute inset-0 z-10 flex items-center justify-center rounded-lg', {
             'bg-white/40': loading,
-            '!cursor-not-allowed bg-dark-8/40': disabled,
+            'bg-dark-8/40': disabled,
             'bg-green-600/40': !isDragReject && isDragActive,
             'bg-red-600/40': isDragReject,
           })}

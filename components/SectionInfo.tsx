@@ -1,4 +1,3 @@
-import { Highlight } from './Highlight';
 import { Shadow } from './Shadow';
 
 export interface SectionInfoProps {
@@ -19,9 +18,17 @@ export function SectionInfo({ title, description, highlight }: SectionInfoProps)
   return (
     <section className="relative mx-auto my-10 w-fit px-6 text-center">
       <h1 className="mx-auto text-4xl font-bold">
-        {tokens.map((value, i) => (value.highlighted ? <Highlight key={i}>{value.str}</Highlight> : value.str))}
+        {tokens.map((value, i) =>
+          value.highlighted ? (
+            <span key={i} className="text-primary-6">
+              {value.str}
+            </span>
+          ) : (
+            value.str
+          )
+        )}
       </h1>
-      <p className="mx-auto mt-2 max-w-md text-lg text-primary-1/70 sm:max-w-xl">{description}</p>
+      <p className="mx-auto mt-2 max-w-md text-lg sm:max-w-xl">{description}</p>
       <Shadow />
     </section>
   );
