@@ -1,11 +1,11 @@
 import { SectionHome } from '@/components/SectionHome';
 
 const guide = {
-  title: 'How to Resize an Image?',
+  title: 'How to Compress an Image?',
   step: 'Adjust the quality and select the exported format.',
 };
 
-export default function RotateHome() {
+export default function CompressHome() {
   return (
     <SectionHome
       title="Compress Images Online"

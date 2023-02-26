@@ -9,14 +9,7 @@ import { Input } from '@/components/Input';
 import { compressImage } from '@/utils/compress-image';
 import type { GetServerSideProps } from 'next';
 
-interface CropProps {
-  url: string;
-  width: number;
-  height: number;
-  publicId: string;
-}
-
-export default function CropEditor({ url, width, height, publicId }: CropProps) {
+export default function CompressEditor({ url, width, height, publicId }: BaseProps) {
   const router = useRouter();
   const [compressing, setCompressing] = useState(false);
   const [qualityValue, setQuality] = useState(80);
@@ -120,7 +113,7 @@ export default function CropEditor({ url, width, height, publicId }: CropProps) 
   );
 }
 
-export const getServerSideProps: GetServerSideProps<CropProps> = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps<BaseProps> = async ({ query }) => {
   const { publicId } = query;
 
   return await getResourceFromPublicId(publicId)

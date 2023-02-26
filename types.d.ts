@@ -3,6 +3,11 @@ declare global {
     publicId: string;
     url: string;
   }
+
+  interface BaseProps extends BaseResponse {
+    width: number;
+    height: number;
+  }
 }
 
 export {};

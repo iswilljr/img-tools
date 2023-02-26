@@ -1,11 +1,11 @@
 import { SectionHome } from '@/components/SectionHome';
 
 const guide = {
-  title: 'How To Crop an Image?',
+  title: 'How To Resize an Image?',
   step: 'Enter a new target size for your image.',
 };
 
-export default function RotateHome() {
+export default function ResizeHome() {
   return (
     <SectionHome
       title="Resize Image Files Online"

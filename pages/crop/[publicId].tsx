@@ -7,17 +7,10 @@ import { Button } from '@/components/Button';
 import { cropImage } from '@/utils/crop-image';
 import { getResourceFromPublicId } from '@/utils/get-resource';
 import { Input } from '@/components/Input';
-import 'react-image-crop/dist/ReactCrop.css';
 import type { GetServerSideProps } from 'next';
+import 'react-image-crop/dist/ReactCrop.css';
 
-interface CropProps {
-  url: string;
-  width: number;
-  height: number;
-  publicId: string;
-}
-
-export default function CropEditor({ url, width, height, publicId }: CropProps) {
+export default function CropEditor({ url, width, height, publicId }: BaseProps) {
   const router = useRouter();
   const imgRef = useRef<HTMLImageElement>(null);
   const [cropping, setCropping] = useState(false);
@@ -114,7 +107,7 @@ export default function CropEditor({ url, width, height, publicId }: CropProps) 
   );
 }
 
-export const getServerSideProps: GetServerSideProps<CropProps> = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps<BaseProps> = async ({ query }) => {
   const { publicId } = query;
 
   return await getResourceFromPublicId(publicId)

@@ -1,30 +1,22 @@
 import { useCallback, useRef, useState } from 'react';
-import { useRouter } from 'next/router';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import clsx from 'clsx';
 import { toast } from 'react-hot-toast';
 import { Button } from '@/components/Button';
 import { getResourceFromPublicId } from '@/utils/get-resource';
 import { Input } from '@/components/Input';
-import 'react-image-crop/dist/ReactCrop.css';
-import type { GetServerSideProps } from 'next';
-import clsx from 'clsx';
 import { resizeImage } from '@/utils/resize-image';
-
-interface CropProps {
-  url: string;
-  width: number;
-  height: number;
-  publicId: string;
-}
+import type { GetServerSideProps } from 'next';
 
 const getAspectRatioValue = (n: number, first: number, base: number) => {
   return Math.round(n / (first / base));
 };
 
-export default function CropEditor({ url, width: initialWidth, height: initialHeight, publicId }: CropProps) {
+export default function ResizeEditor({ url, width: initialWidth, height: initialHeight, publicId }: BaseProps) {
   const router = useRouter();
   const imgRef = useRef<HTMLImageElement>(null);
-  const [cropping, setCropping] = useState(false);
+  const [resizing, setResizing] = useState(false);
   const [width, setWidth] = useState(initialWidth);
   const [height, setHeight] = useState(initialHeight);
   const [lockAspectRatio, setLockAspectRatio] = useState(true);
@@ -60,8 +52,8 @@ export default function CropEditor({ url, width: initialWidth, height: initialHe
           }}
           onSubmit={e => {
             e.preventDefault();
-            if (cropping) return;
-            setCropping(true);
+            if (resizing) return;
+            setResizing(true);
             const bgColor = lockAspectRatio || transparent ? '#0000' : color;
 
             toast
@@ -72,7 +64,7 @@ export default function CropEditor({ url, width: initialWidth, height: initialHe
               })
               .then(json => router.push(`/download/${json.publicId}`))
               .catch(() => {})
-              .finally(() => setCropping(false));
+              .finally(() => setResizing(false));
           }}
         >
           <div>
@@ -83,7 +75,7 @@ export default function CropEditor({ url, width: initialWidth, height: initialHe
               type="number"
               value={width}
               onChange={e => handleDimensionsChange(e, width, height, setWidth, setHeight)}
-              disabled={cropping}
+              disabled={resizing}
             />
             <Input
               id="height"
@@ -91,15 +83,15 @@ export default function CropEditor({ url, width: initialWidth, height: initialHe
               type="number"
               value={height}
               onChange={e => handleDimensionsChange(e, height, width, setHeight, setWidth)}
-              disabled={cropping}
+              disabled={resizing}
             />
-            <div className={clsx('mt-3 flex items-center gap-2', { 'text-white/50': cropping })}>
+            <div className={clsx('mt-3 flex items-center gap-2', { 'text-white/50': resizing })}>
               <input
                 className="appearance-none rounded-sm focus:border-none focus:outline-none focus:ring-0 disabled:bg-white/50 disabled:hover:bg-white/50"
                 id="lock"
                 type="checkbox"
                 checked={lockAspectRatio}
-                disabled={cropping}
+                disabled={resizing}
                 onChange={() => {
                   setLockAspectRatio(lockAspectRatio => {
                     if (!lockAspectRatio) {
@@ -116,7 +108,7 @@ export default function CropEditor({ url, width: initialWidth, height: initialHe
               className={clsx('mt-4 flex transform flex-col gap-4 rounded-lg duration-300', {
                 'pointer-events-none -translate-x-full opacity-0 ': lockAspectRatio,
                 'translate-x-0': !lockAspectRatio,
-                'text-white/50': cropping,
+                'text-white/50': resizing,
               })}
             >
               <div>Background Fill</div>
@@ -137,7 +129,7 @@ export default function CropEditor({ url, width: initialWidth, height: initialHe
                       <input
                         value={color}
                         onChange={e => setColor(e.target.value)}
-                        disabled={cropping}
+                        disabled={resizing}
                         className="absolute right-0 h-6 w-6 cursor-pointer opacity-0"
                         type="color"
                         id="color"
@@ -159,12 +151,12 @@ export default function CropEditor({ url, width: initialWidth, height: initialHe
             </div>
           </div>
           <div>
-            <Button disabled={cropping} variant="dark" type="reset">
+            <Button disabled={resizing} variant="dark" type="reset">
               Reset
             </Button>
             <Button
-              disabled={cropping}
-              loading={cropping}
+              disabled={resizing}
+              loading={resizing}
               className="mb-6 flex items-center justify-center"
               type="submit"
             >
@@ -180,7 +172,7 @@ export default function CropEditor({ url, width: initialWidth, height: initialHe
   );
 }
 
-export const getServerSideProps: GetServerSideProps<CropProps> = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps<BaseProps> = async ({ query }) => {
   const { publicId } = query;
 
   return await getResourceFromPublicId(publicId)

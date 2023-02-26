@@ -7,14 +7,7 @@ import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import type { GetServerSideProps } from 'next';
 
-interface CropProps {
-  url: string;
-  width: number;
-  height: number;
-  publicId: string;
-}
-
-export default function CropEditor({ url, width, height }: CropProps) {
+export default function RotateEditor({ url, width, height }: BaseProps) {
   const router = useRouter();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -167,7 +160,7 @@ export default function CropEditor({ url, width, height }: CropProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps<CropProps> = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps<BaseProps> = async ({ query }) => {
   const { publicId } = query;
 
   return await getResourceFromPublicId(publicId)
