@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import { toast } from 'react-hot-toast';
 import { Button } from '@/components/Button';
 import { getResourceFromPublicId } from '@/utils/get-resource';
 import { Input } from '@/components/Input';
@@ -61,9 +62,16 @@ export default function CropEditor({ url, width: initialWidth, height: initialHe
             e.preventDefault();
             if (cropping) return;
             setCropping(true);
-            resizeImage({ publicId, width, height, color: lockAspectRatio || transparent ? '#0000' : color })
+            const bgColor = lockAspectRatio || transparent ? '#0000' : color;
+
+            toast
+              .promise(resizeImage({ publicId, width, height, color: bgColor }), {
+                error: err => err.data.message ?? err.message ?? 'Error resizing image',
+                loading: 'Resizing image',
+                success: 'Image successfully resized',
+              })
               .then(json => router.push(`/download/${json.publicId}`))
-              .catch(console.error)
+              .catch(() => {})
               .finally(() => setCropping(false));
           }}
         >

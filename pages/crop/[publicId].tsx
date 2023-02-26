@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import ReactCrop, { type Crop } from 'react-image-crop';
+import { toast } from 'react-hot-toast';
 import { Button } from '@/components/Button';
 import { cropImage } from '@/utils/crop-image';
 import { getResourceFromPublicId } from '@/utils/get-resource';
@@ -46,9 +47,14 @@ export default function CropEditor({ url, width, height, publicId }: CropProps) 
             e.preventDefault();
             if (cropping) return;
             setCropping(true);
-            cropImage(publicId, crop)
+            toast
+              .promise(cropImage(publicId, crop), {
+                error: err => err.data.message ?? err.message ?? 'Something went wrong',
+                loading: 'Cropping image',
+                success: 'Image successfully cropped',
+              })
               .then(json => router.push(`/download/${json.publicId}`))
-              .catch(console.error)
+              .catch(() => {})
               .finally(() => setCropping(false));
           }}
         >

@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { IconLoader, IconUpload } from '@tabler/icons-react';
 import { useDropzone, type Accept } from 'react-dropzone';
+import { toast } from 'react-hot-toast';
 import { useState } from 'react';
 import { Button } from './Button';
 
@@ -21,12 +22,18 @@ export function Dropzone({ accept, onFileAccepted }: DropzoneProps) {
     onDropAccepted: files => {
       setError('');
       setLoading(true);
-      onFileAccepted(files[0])
-        .catch(() => setError('Something went wrong'))
-        .finally(() => {
-          setLoading(false);
-          setDisabled(true);
-        });
+
+      const getError = (err: any) => err.data.message ?? err.message ?? 'Error uploading image';
+
+      toast
+        .promise(onFileAccepted(files[0]), {
+          error: getError,
+          loading: 'Uploading image',
+          success: 'Image successfully uploaded',
+        })
+        .then(() => setDisabled(true))
+        .catch(err => setError(getError(err)))
+        .finally(() => setLoading(false));
     },
   });
 

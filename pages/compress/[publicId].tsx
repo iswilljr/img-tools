@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { toast } from 'react-hot-toast';
 import { useDebounce } from 'use-debounce';
 import { getResourceFromPublicId } from '@/utils/get-resource';
 import { Button } from '@/components/Button';
@@ -33,9 +34,14 @@ export default function CropEditor({ url, width, height, publicId }: CropProps) 
             if (compressing) return;
 
             setCompressing(true);
-            compressImage({ publicId, quality: qualityValue, format })
+            toast
+              .promise(compressImage({ publicId, quality: qualityValue, format }), {
+                error: err => err.data.message ?? err.message ?? 'Error compressing image',
+                loading: 'Compressing image',
+                success: 'Image successfully compressed',
+              })
               .then(json => router.push(`/download/${json.publicId}?from=${publicId}&compress=true`))
-              .catch(console.error)
+              .catch(() => {})
               .finally(() => setCompressing(false));
           }}
         >

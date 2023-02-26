@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
+import { toast } from 'react-hot-toast';
 import { getResourceFromPublicId } from '@/utils/get-resource';
 import { upload } from '@/utils/upload';
 import { Button } from '@/components/Button';
@@ -77,9 +78,14 @@ export default function CropEditor({ url, width, height }: CropProps) {
 
             if (!image) return;
 
-            upload(image)
+            toast
+              .promise(upload(image), {
+                error: err => err.data.message ?? err.message ?? 'Error while generating image',
+                loading: 'Rotating Image',
+                success: 'Image successfully rotated',
+              })
               .then(res => router.push(`/download/${res.publicId}`))
-              .catch(console.error)
+              .catch(() => {})
               .finally(() => setRotating(false));
           }}
         >

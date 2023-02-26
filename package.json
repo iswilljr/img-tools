@@ -22,6 +22,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-dropzone": "14.2.3",
+    "react-hot-toast": "2.4.0",
     "react-image-crop": "10.0.9",
     "redaxios": "0.5.1",
     "use-debounce": "9.0.3"
