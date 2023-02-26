@@ -5,7 +5,7 @@ import { Section } from '@/components/Section';
 export default function Home() {
   return (
     <div className="flex flex-col">
-      <section className="relative mx-auto my-20 w-full px-6  text-center sm:max-w-4xl md:mb-36">
+      <section className="relative mx-auto my-20 w-full px-6 text-center sm:max-w-4xl md:mb-36">
         <h1 className="text-4xl font-bold !leading-[1.15] sm:text-6xl">
           Free Online <span className="text-primary-6">Image Converter</span>
         </h1>

@@ -38,7 +38,7 @@ export function Dropzone({ accept, onFileAccepted }: DropzoneProps) {
   });
 
   return (
-    <section className="mx-auto mb-10 w-full px-6 text-center sm:max-w-4xl">
+    <section className="mx-auto w-full px-6 text-center sm:max-w-4xl">
       <div className="relative rounded-lg bg-gradient-to-br from-primary-6 to-primary-8 bg-cover p-2">
         <div
           className={clsx('pointer-events-none absolute inset-0 z-10 flex items-center justify-center rounded-lg', {

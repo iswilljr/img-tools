@@ -5,7 +5,6 @@ import Link from 'next/link';
 export interface SectionProps {
   title: string;
   description: string;
-  label: string;
   icon: (props: TablerIconsProps) => JSX.Element;
   tryItOut: string;
 }
