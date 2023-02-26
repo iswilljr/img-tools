@@ -1,8 +1,8 @@
 import { SectionHome } from '@/components/SectionHome';
 
 const guide = {
-  title: 'How To Crop an Image?',
-  step: 'Draw a crop rectangle on the image.',
+  title: 'How to Resize an Image?',
+  step: 'Adjust the quality and select the exported format.',
 };
 
 export default function RotateHome() {
