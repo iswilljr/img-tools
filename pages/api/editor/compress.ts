@@ -1,30 +1,28 @@
+import { z } from 'zod';
+import { apiHandler } from '@/utils/api-handler';
 import { cloudinary } from '@/utils/cloudinary';
 import { getResourceFromPublicId } from '@/utils/get-resource';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method?.toLowerCase() !== 'post') {
-    return res.status(405).end();
-  }
+const bodySchema = z.object({
+  publicId: z.string(),
+  quality: z.number().min(5).max(100),
+  format: z.enum(['png', 'jpg', 'webp', 'avif']),
+});
 
-  const { publicId, quality, format } = req.body;
+async function compressImage(req: NextApiRequest, res: NextApiResponse<BaseResponse>) {
+  const { publicId, quality, format } = bodySchema.parse(req.body);
 
-  try {
-    if (typeof publicId !== 'string') throw Error('Invalid publicId param');
-    if (typeof quality !== 'number') throw Error('Invalid quality param');
-    if (typeof format !== 'string') throw Error('Invalid format param');
+  const resource = await getResourceFromPublicId(publicId);
 
-    const resource = await getResourceFromPublicId(publicId);
+  const compressedImageUrl = cloudinary.url(resource.publicId, {
+    fetch_format: format,
+    quality,
+  });
 
-    const compressedImageUrl = cloudinary.url(resource.publicId, {
-      fetch_format: format,
-      quality,
-    });
+  const img = await cloudinary.uploader.upload(compressedImageUrl);
 
-    const img = await cloudinary.uploader.upload(compressedImageUrl);
-
-    res.json({ publicId: img.public_id, url: img.secure_url });
-  } catch (error: any) {
-    res.status(400).json({ message: error.message });
-  }
+  res.json({ publicId: img.public_id, url: img.secure_url });
 }
+
+export default apiHandler(compressImage);

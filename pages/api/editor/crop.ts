@@ -1,35 +1,33 @@
+import { z } from 'zod';
+import { apiHandler } from '@/utils/api-handler';
 import { cloudinary } from '@/utils/cloudinary';
 import { getResourceFromPublicId } from '@/utils/get-resource';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method?.toLowerCase() !== 'post') {
-    return res.status(405).end();
-  }
+const bodySchema = z.object({
+  publicId: z.string(),
+  width: z.number().transform(Math.round),
+  height: z.number().transform(Math.round),
+  x: z.number().transform(Math.round),
+  y: z.number().transform(Math.round),
+});
 
-  const { publicId, width, height, x, y } = req.body;
+async function cropImage(req: NextApiRequest, res: NextApiResponse<BaseResponse>) {
+  const { publicId, width, height, x, y } = bodySchema.parse(req.body);
 
-  try {
-    if (typeof publicId !== 'string') throw Error('Invalid publicId param');
+  const resource = await getResourceFromPublicId(publicId);
 
-    const isValid = [width, height, x, y].every(value => typeof value === 'number');
+  const croppedImageUrl = cloudinary.url(resource.publicId, {
+    crop: 'crop',
+    width,
+    height,
+    x,
+    y,
+  });
 
-    if (!isValid) throw Error('Expected values to be type number');
+  const img = await cloudinary.uploader.upload(croppedImageUrl);
 
-    const resource = await getResourceFromPublicId(publicId);
-
-    const croppedImageUrl = cloudinary.url(resource.publicId, {
-      crop: 'crop',
-      width: Math.round(width),
-      height: Math.round(height),
-      x: Math.round(x),
-      y: Math.round(y),
-    });
-
-    const img = await cloudinary.uploader.upload(croppedImageUrl);
-
-    res.json({ publicId: img.public_id, url: img.secure_url });
-  } catch (error: any) {
-    res.status(400).json({ message: error.message });
-  }
+  res.json({ publicId: img.public_id, url: img.secure_url });
 }
+
+export default apiHandler(cropImage);

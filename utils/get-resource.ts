@@ -1,7 +1,7 @@
 import { cloudinary } from './cloudinary';
 
 export const getResourceFromPublicId = async (publicId: unknown) => {
-  if (typeof publicId !== 'string') throw Error('Invalid publicId param');
+  if (typeof publicId !== 'string' || !publicId) throw Error('Invalid publicId param');
 
   const {
     secure_url: url,

@@ -37,6 +37,7 @@ specifiers:
   tailwindcss: 3.2.7
   typescript: 4.9.5
   use-debounce: 9.0.3
+  zod: 3.20.6
 
 dependencies:
   '@next/font': 13.2.1
@@ -51,6 +52,7 @@ dependencies:
   react-image-crop: 10.0.9_react@18.2.0
   redaxios: 0.5.1
   use-debounce: 9.0.3_react@18.2.0
+  zod: 3.20.6
 
 devDependencies:
   '@tailwindcss/forms': 0.5.3_tailwindcss@3.2.7
@@ -3735,3 +3737,7 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
+
+  /zod/3.20.6:
+    resolution: {integrity: sha512-oyu0m54SGCtzh6EClBVqDDlAYRz4jrVtKwQ7ZnsEmMI9HnzuZFj8QFwAY1M5uniIYACdGvv0PBWPF2kO0aNofA==}
+    dev: false
