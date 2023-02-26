@@ -63,7 +63,7 @@ export default function CropEditor({ url, width, height }: CropProps) {
     <div className="flex flex-col sm:h-[calc(100vh-64px)] sm:flex-row">
       <section className="flex h-full w-full overflow-auto border-b border-gray-700 sm:min-w-[20rem] sm:max-w-[20rem] sm:border-r sm:border-b-transparent">
         <form
-          className="flex w-full flex-col justify-between px-6 pt-6 text-white sm:h-full"
+          className="flex w-full flex-col justify-between px-6 pt-6 sm:h-full"
           onReset={() => {
             setVerticallyFlipped(false);
             setHorizontallyFlipped(false);

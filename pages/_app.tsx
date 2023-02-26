@@ -27,7 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Toaster
         position="bottom-center"
         containerClassName=""
-        toastOptions={{ className: '!bg-dark-4 !text-white !shadow-lg' }}
+        toastOptions={{ className: '!bg-dark-4 !text-white/90 !shadow-lg' }}
       />
     </div>
   );

@@ -42,7 +42,7 @@ export default function CropEditor({ url, width, height, publicId }: CropProps) 
       <section className="flex h-full w-full overflow-auto border-b border-gray-700 sm:min-w-[20rem] sm:max-w-[20rem] sm:border-r sm:border-b-transparent">
         <form
           onReset={() => setCrop({ width, height, unit: 'px', x: 0, y: 0 })}
-          className="flex w-full flex-col justify-between px-6 pt-6 text-white sm:h-full"
+          className="flex w-full flex-col justify-between px-6 pt-6 sm:h-full"
           onSubmit={e => {
             e.preventDefault();
             if (cropping) return;

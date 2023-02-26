@@ -27,7 +27,7 @@ export default function CropEditor({ url, width, height, publicId }: CropProps) 
     <div className="flex flex-col sm:h-[calc(100vh-64px)] sm:flex-row">
       <section className="flex h-full w-full overflow-auto border-b border-gray-700 sm:min-w-[20rem] sm:max-w-[20rem] sm:border-r sm:border-b-transparent">
         <form
-          className="flex w-full flex-col justify-between px-6 pt-6 text-white sm:h-full"
+          className="flex w-full flex-col justify-between px-6 pt-6 sm:h-full"
           onReset={() => setQuality(80)}
           onSubmit={e => {
             e.preventDefault();
@@ -78,7 +78,7 @@ export default function CropEditor({ url, width, height, publicId }: CropProps) 
                 Format
               </label>
               <select
-                className="mt-2 w-full rounded-md border-gray-700 bg-dark-8 py-2 text-white outline-none focus:border-secondary-6 focus:ring-0 disabled:cursor-not-allowed disabled:border-gray-700/50 disabled:bg-dark-8/50 disabled:text-white/50"
+                className="mt-2 w-full rounded-md border-gray-700 bg-dark-8 py-2 outline-none focus:border-secondary-6 focus:ring-0 disabled:cursor-not-allowed disabled:border-gray-700/50 disabled:bg-dark-8/50 disabled:text-white/50"
                 name="format"
                 id="format"
                 value={format}
