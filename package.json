@@ -14,7 +14,6 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@next/font": "13.2.1",
     "@tabler/icons-react": "2.5.0",
     "cloudinary": "1.34.0",
     "clsx": "1.2.1",
