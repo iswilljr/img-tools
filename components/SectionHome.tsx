@@ -50,7 +50,7 @@ export function SectionHome({ title, description, highlight, editor, guide }: Se
           <li>
             Click the{' '}
             <strong className="font-bold">&quot;{`${editor.at(0)!.toUpperCase()}${editor.slice(1)}`}&quot;</strong>{' '}
-            button to crop your image.
+            button to {editor} your image.
           </li>
         </ol>
       </div>
