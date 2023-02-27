@@ -1,4 +1,5 @@
 import { cloudinary } from './cloudinary';
+import type { GetServerSideProps } from 'next';
 
 export const getResourceFromPublicId = async (publicId: unknown) => {
   if (typeof publicId !== 'string' || !publicId) throw Error('Invalid publicId param');
@@ -12,4 +13,12 @@ export const getResourceFromPublicId = async (publicId: unknown) => {
   });
 
   return { url, width, height, publicId };
+};
+
+export const defaultGetServerSideProps: GetServerSideProps<BaseProps> = async ({ query }) => {
+  const { publicId } = query;
+
+  return await getResourceFromPublicId(publicId)
+    .then(props => ({ props }))
+    .catch(() => ({ notFound: true }));
 };

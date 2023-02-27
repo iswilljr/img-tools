@@ -2,11 +2,9 @@ import { useCallback, useRef, useState } from 'react';
 import Image from 'next/image';
 import ReactCrop, { type Crop } from 'react-image-crop';
 import { cropImage } from '@/utils/crop-image';
-import { getResourceFromPublicId } from '@/utils/get-resource';
 import { Input } from '@/components/Input';
 import { Editor } from '@/components/Editor';
 import { useSubmit } from '@/hooks/use-submit';
-import type { GetServerSideProps } from 'next';
 import 'react-image-crop/dist/ReactCrop.css';
 
 export default function CropEditor({ url, width, height, publicId }: BaseProps) {
@@ -76,10 +74,4 @@ export default function CropEditor({ url, width, height, publicId }: BaseProps) 
   );
 }
 
-export const getServerSideProps: GetServerSideProps<BaseProps> = async ({ query }) => {
-  const { publicId } = query;
-
-  return await getResourceFromPublicId(publicId)
-    .then(props => ({ props }))
-    .catch(() => ({ notFound: true }));
-};
+export { defaultGetServerSideProps as getServerSideProps } from 'utils/get-resource';

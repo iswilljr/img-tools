@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { useDebounce } from 'use-debounce';
-import { getResourceFromPublicId } from '@/utils/get-resource';
 import { compressImage } from '@/utils/compress-image';
 import { useSubmit } from '@/hooks/use-submit';
 import { Input } from '@/components/Input';
 import { SelectInput } from '@/components/Select';
 import { Editor } from '@/components/Editor';
-import type { GetServerSideProps } from 'next';
 
 export default function CompressEditor({ url, width, height, publicId }: BaseProps) {
   const [compressing, setCompressing] = useState(false);
@@ -76,10 +74,4 @@ export default function CompressEditor({ url, width, height, publicId }: BasePro
   );
 }
 
-export const getServerSideProps: GetServerSideProps<BaseProps> = async ({ query }) => {
-  const { publicId } = query;
-
-  return await getResourceFromPublicId(publicId)
-    .then(props => ({ props }))
-    .catch(() => ({ notFound: true }));
-};
+export { defaultGetServerSideProps as getServerSideProps } from 'utils/get-resource';

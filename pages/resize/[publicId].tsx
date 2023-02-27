@@ -1,10 +1,8 @@
 import { useCallback, useRef, useState } from 'react';
 import Image from 'next/image';
 import clsx from 'clsx';
-import { getResourceFromPublicId } from '@/utils/get-resource';
 import { Input } from '@/components/Input';
 import { resizeImage } from '@/utils/resize-image';
-import type { GetServerSideProps } from 'next';
 import { Editor } from '@/components/Editor';
 import { useSubmit } from '@/hooks/use-submit';
 
@@ -145,10 +143,4 @@ export default function ResizeEditor({ url, width: initialWidth, height: initial
   );
 }
 
-export const getServerSideProps: GetServerSideProps<BaseProps> = async ({ query }) => {
-  const { publicId } = query;
-
-  return await getResourceFromPublicId(publicId)
-    .then(props => ({ props }))
-    .catch(() => ({ notFound: true }));
-};
+export { defaultGetServerSideProps as getServerSideProps } from 'utils/get-resource';

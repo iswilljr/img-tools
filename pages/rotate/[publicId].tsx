@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { getResourceFromPublicId } from '@/utils/get-resource';
 import { upload } from '@/utils/upload';
 import { loadImage } from '@/utils/load-image';
 import { rotateImage } from '@/utils/rotate-image';
@@ -9,7 +8,6 @@ import { useSubmit } from '@/hooks/use-submit';
 import { CheckboxButton } from '@/components/CheckboxButton';
 import { Input } from '@/components/Input';
 import { Editor } from '@/components/Editor';
-import type { GetServerSideProps } from 'next';
 
 export default function RotateEditor({ url, width, height, publicId }: BaseProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -94,10 +92,4 @@ export default function RotateEditor({ url, width, height, publicId }: BaseProps
   );
 }
 
-export const getServerSideProps: GetServerSideProps<BaseProps> = async ({ query }) => {
-  const { publicId } = query;
-
-  return await getResourceFromPublicId(publicId)
-    .then(props => ({ props }))
-    .catch(() => ({ notFound: true }));
-};
+export { defaultGetServerSideProps as getServerSideProps } from 'utils/get-resource';
