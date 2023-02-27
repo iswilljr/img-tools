@@ -1,162 +1,96 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/router';
 import { toast } from 'react-hot-toast';
 import { getResourceFromPublicId } from '@/utils/get-resource';
 import { upload } from '@/utils/upload';
-import { Button } from '@/components/Button';
+import { loadImage } from '@/utils/load-image';
+import { rotateImage } from '@/utils/rotate-image';
+import { useSubmit } from '@/hooks/use-submit';
+import { CheckboxButton } from '@/components/CheckboxButton';
 import { Input } from '@/components/Input';
+import { Editor } from '@/components/Editor';
 import type { GetServerSideProps } from 'next';
 
-export default function RotateEditor({ url, width, height }: BaseProps) {
-  const router = useRouter();
+export default function RotateEditor({ url, width, height, publicId }: BaseProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
+  const img = useRef<HTMLImageElement>(null);
+  const ctx = useRef<CanvasRenderingContext2D>(null);
   const [rotating, setRotating] = useState(false);
-  const [context, setContext] = useState<CanvasRenderingContext2D>();
   const [degrees, setDegrees] = useState(0);
   const [horizontallyFlipped, setHorizontallyFlipped] = useState(false);
   const [verticallyFlipped, setVerticallyFlipped] = useState(false);
 
   useEffect(() => {
-    const context = canvasRef.current?.getContext('2d');
+    const initialCtx = canvasRef.current?.getContext('2d');
+    if (!initialCtx) return;
 
-    if (!context) return;
-
-    new Promise<HTMLImageElement>(resolve => {
-      const image = new Image();
-      image.setAttribute('crossorigin', 'anonymous');
-      image.setAttribute('src', url);
-      image.onload = () => resolve(image);
-    }).then(baseImage => {
-      context.drawImage(baseImage, 0, 0);
-      (imageRef as any).current = baseImage;
-      setContext(context);
-    });
+    loadImage(url)
+      .then(baseImg => {
+        initialCtx.drawImage(baseImg, 0, 0);
+        (img as any).current = baseImg;
+        (ctx as any).current = initialCtx;
+      })
+      .catch(() => toast.error('Error loading image'));
   }, [url]);
 
   useEffect(() => {
-    if (!context || !imageRef.current) return;
+    if (!ctx.current || !img.current) return;
+    rotateImage({ degrees, width, height, ctx: ctx.current, img: img.current, horizontallyFlipped, verticallyFlipped });
+  }, [ctx, degrees, horizontallyFlipped, verticallyFlipped, width, height]);
 
-    const positionX = -width / 2;
-    const positionY = -height / 2;
-    const scaleX = horizontallyFlipped ? -1 : 1;
-    const scaleY = verticallyFlipped ? -1 : 1;
-
-    context.clearRect(0, 0, width, height);
-    context.save();
-    context.translate(width / 2, height / 2);
-    context.rotate((degrees * Math.PI) / 180.0);
-    context.scale(scaleX, scaleY);
-    context.translate(-positionX - width / 2, -positionY - height / 2);
-    context.drawImage(imageRef.current, positionX, positionY, width, height);
-    context.restore();
-  }, [context, degrees, horizontallyFlipped, verticallyFlipped, width, height]);
+  const handleSubmit = useSubmit({
+    publicId,
+    editor: 'rotate',
+    defaultError: 'Error while generating image',
+    loading: 'Rotating image',
+    success: 'Image successfully rotated',
+    shouldCancel: () => !img.current || rotating || setRotating(true),
+    onSubmit: () => upload(canvasRef.current!.toDataURL()),
+    onFinish: () => setRotating(false),
+  });
 
   return (
-    <div className="flex flex-col sm:h-[calc(100vh-64px)] sm:flex-row">
-      <section className="flex h-full w-full overflow-auto border-b border-gray-700 sm:min-w-[20rem] sm:max-w-[20rem] sm:border-r sm:border-b-transparent">
-        <form
-          className="flex w-full flex-col justify-between px-6 pt-6 sm:h-full"
-          onReset={() => {
-            setVerticallyFlipped(false);
-            setHorizontallyFlipped(false);
-            setDegrees(0);
-          }}
-          onSubmit={e => {
-            e.preventDefault();
-            if (rotating) return;
-            setRotating(true);
-
-            const image = canvasRef.current?.toDataURL();
-
-            if (!image) return;
-
-            toast
-              .promise(upload(image), {
-                error: err => err.data.message ?? err.message ?? 'Error while generating image',
-                loading: 'Rotating Image',
-                success: 'Image successfully rotated',
-              })
-              .then(res => router.push(`/download/${res.publicId}`))
-              .catch(() => {})
-              .finally(() => setRotating(false));
-          }}
-        >
-          <div>
-            <div>
-              <h2 className="text-2xl font-semibold">Rotate Image</h2>
-              <Input
-                id="degrees"
-                label="Degrees"
-                type="range"
-                min={0}
-                max={360}
-                value={degrees}
-                onChange={e => setDegrees(e.target.valueAsNumber)}
-                disabled={rotating}
-              />
-            </div>
-            <div className="mt-5">
-              <h2 className="text-2xl font-semibold">Flip Image</h2>
-              <Input
-                className="hidden"
-                type="checkbox"
-                name="horizontally"
-                id="horizontally"
-                hidden
-                checked={horizontallyFlipped}
-                readOnly
-                label={
-                  <Button
-                    variant="dark"
-                    type="button"
-                    onClick={() => setHorizontallyFlipped(o => !o)}
-                    disabled={rotating}
-                  >
-                    Horizontally
-                  </Button>
-                }
-              />
-              <Input
-                className="hidden"
-                type="checkbox"
-                name="vertically"
-                id="vertically"
-                hidden
-                checked={verticallyFlipped}
-                readOnly
-                label={
-                  <Button
-                    variant="dark"
-                    type="button"
-                    onClick={() => setVerticallyFlipped(o => !o)}
-                    disabled={rotating}
-                  >
-                    Vertically
-                  </Button>
-                }
-              />
-            </div>
-          </div>
-          <div>
-            <Button variant="dark" type="reset" disabled={rotating}>
-              Reset
-            </Button>
-            <Button
-              className="mb-6 flex items-center justify-center"
-              type="submit"
-              disabled={rotating}
-              loading={rotating}
-            >
-              Rotate
-            </Button>
-          </div>
-        </form>
-      </section>
-      <section className="relative flex h-full w-full items-center justify-center p-6">
-        <canvas className="max-h-full max-w-full" ref={canvasRef} width={width} height={height} />
-      </section>
-    </div>
+    <Editor
+      formButtonProps={{ label: 'Rotate', disabled: rotating }}
+      onSubmit={handleSubmit}
+      onReset={() => {
+        setVerticallyFlipped(false);
+        setHorizontallyFlipped(false);
+        setDegrees(0);
+      }}
+      content={<canvas className="max-h-full max-w-full" ref={canvasRef} width={width} height={height} />}
+    >
+      <div>
+        <h2 className="text-2xl font-semibold">Rotate Image</h2>
+        <Input
+          id="degrees"
+          label="Degrees"
+          type="range"
+          min={0}
+          max={360}
+          value={degrees}
+          onChange={e => setDegrees(e.target.valueAsNumber)}
+          disabled={rotating}
+        />
+      </div>
+      <div className="mt-5">
+        <h2 className="text-2xl font-semibold">Flip Image</h2>
+        <CheckboxButton
+          id="horizontally"
+          label="Horizontally"
+          checked={horizontallyFlipped}
+          disabled={rotating}
+          onClick={() => setHorizontallyFlipped(o => !o)}
+        />
+        <CheckboxButton
+          id="vertically"
+          label="Vertically"
+          checked={verticallyFlipped}
+          disabled={rotating}
+          onClick={() => setVerticallyFlipped(o => !o)}
+        />
+      </div>
+    </Editor>
   );
 }
 
