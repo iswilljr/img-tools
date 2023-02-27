@@ -55,10 +55,10 @@ export function Dropzone({ accept, onFileAccepted }: DropzoneProps) {
             <input disabled={disabled} {...getInputProps()} />
             <div className="mx-auto flex flex-col items-center justify-center space-y-2">
               <IconUpload size={120} />
-              <p className="capitalize">Drop your file here</p>
+              <p className="capitalize">Drop your image here</p>
             </div>
             <Button type="button" className="!w-fit capitalize" disabled={disabled}>
-              Choose your file
+              Choose your image
             </Button>
           </div>
         </div>
