@@ -38,7 +38,7 @@ export default function ResizeEditor({ url, width: initialWidth, height: initial
 
   const handleSubmit = useSubmit({
     publicId,
-    editor: 'rotate',
+    editor: 'resize',
     defaultError: 'Error resizing image',
     loading: 'Resizing image',
     success: 'Image successfully resized',
