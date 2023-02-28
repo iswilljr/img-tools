@@ -8,7 +8,7 @@ interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
 
 export function Select({ label, data, className, ...props }: SelectProps) {
   return (
-    <div className="mt-2 flex flex-col gap-2">
+    <div className="mt-2 flex flex-col">
       <label className="text-md" htmlFor="format">
         {label}
       </label>
