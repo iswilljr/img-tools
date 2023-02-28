@@ -29,7 +29,7 @@ export function useSubmit(options: UseSubmitOptions) {
           loading,
           success,
         })
-        .then(res => router.push(`/download/${res.publicId}?from=${publicId}&${editor}=true`))
+        .then(res => router.push(`/download/${res.publicId}?from=${publicId}&editor=${editor}`))
         .catch(() => {})
         .finally(onFinish);
     },

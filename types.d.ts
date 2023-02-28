@@ -7,6 +7,7 @@ declare global {
   interface BaseProps extends BaseResponse {
     width: number;
     height: number;
+    bytes: number;
   }
 }
 

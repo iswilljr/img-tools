@@ -8,11 +8,12 @@ export const getResourceFromPublicId = async (publicId: unknown) => {
     secure_url: url,
     width,
     height,
+    bytes,
   } = await cloudinary.api.resource(publicId).catch(() => {
     throw new Error('Resource not found');
   });
 
-  return { url, width, height, publicId };
+  return { url, width, height, bytes, publicId };
 };
 
 export const defaultGetServerSideProps: GetServerSideProps<BaseProps> = async ({ query }) => {
