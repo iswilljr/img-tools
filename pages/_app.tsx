@@ -7,6 +7,7 @@ import type { AppProps } from 'next/app';
 import '@/styles/globals.css';
 
 const Toaster = dynamic(() => import('react-hot-toast').then(module => module.Toaster));
+const Progress = dynamic(() => import('nextjs-progressbar'));
 
 const inter = Inter({
   subsets: ['latin'],
@@ -29,6 +30,7 @@ export default function App({ Component, pageProps }: AppProps) {
         containerClassName=""
         toastOptions={{ className: '!bg-dark-4 !text-white/90 !shadow-lg' }}
       />
+      <Progress color="#1F52A1" options={{ showSpinner: false }} />
     </div>
   );
 }
