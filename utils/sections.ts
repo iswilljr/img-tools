@@ -1,12 +1,5 @@
 import type { SectionProps } from '@/components/Section';
-import {
-  IconArrowsMaximize,
-  IconArrowsMinimize,
-  IconCrop,
-  IconDroplet,
-  IconPhoto,
-  IconRotate,
-} from '@tabler/icons-react';
+import { IconArrowsMaximize, IconArrowsMinimize, IconCrop, IconPhoto, IconRotate } from '@tabler/icons-react';
 
 export const sections: SectionProps[] = [
   {
@@ -22,13 +15,6 @@ export const sections: SectionProps[] = [
       'Your image is upside down or inverted? This editing tool will allow you to rotate an image or mirror image files vertically and horizontally.',
     tryItOut: '/rotate',
     icon: IconRotate,
-  },
-  {
-    title: 'Watermark',
-    description:
-      'With this online photo editor, you can add different kinds of watermarks to your photos, pictures, and other images. Add other images as watermarks.',
-    tryItOut: '/watermark',
-    icon: IconDroplet,
   },
   {
     title: 'Compress',
@@ -47,7 +33,7 @@ export const sections: SectionProps[] = [
   {
     title: 'Convert',
     description:
-      'This image converter allows you to convert your pictures into other image formats. Convert JPG to PNG, JPG to SVG, PNG to WEBP and more..',
+      'This image converter allows you to convert your pictures into other image formats. Convert JPG to PNG, JPG to SVG, PNG to WEBP and more.',
     tryItOut: '/convert',
     icon: IconPhoto,
   },
