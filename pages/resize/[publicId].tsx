@@ -17,7 +17,7 @@ export default function ResizeEditor({ url, width: initialWidth, height: initial
   const [height, setHeight] = useState(initialHeight);
   const [lockAspectRatio, setLockAspectRatio] = useState(true);
   const [transparent, setTransparent] = useState(false);
-  const [color, setColor] = useState('#000000');
+  const [bgColor, setBgColor] = useState('#000000');
 
   const handleDimensionsChange = useCallback(
     (
@@ -43,7 +43,8 @@ export default function ResizeEditor({ url, width: initialWidth, height: initial
     loading: 'Resizing image',
     success: 'Image successfully resized',
     shouldCancel: () => resizing || setResizing(true),
-    onSubmit: () => resizeImage({ publicId, width, height, color: lockAspectRatio || transparent ? '#0000' : color }),
+    onSubmit: () =>
+      resizeImage({ publicId, width, height, background: lockAspectRatio || transparent ? '#0000' : bgColor }),
     onFinish: () => setResizing(false),
   });
 
@@ -114,11 +115,11 @@ export default function ResizeEditor({ url, width: initialWidth, height: initial
             </div>
             {!transparent && (
               <label htmlFor="color" className="relative flex cursor-pointer items-center gap-3">
-                <div className="ml-auto flex items-center gap-4">{color}</div>
-                <div className="relative h-6 w-6 rounded" style={{ backgroundColor: color }} />
+                <div className="ml-auto flex items-center gap-4">{bgColor}</div>
+                <div className="relative h-6 w-6 rounded" style={{ backgroundColor: bgColor }} />
                 <input
-                  value={color}
-                  onChange={e => setColor(e.target.value)}
+                  value={bgColor}
+                  onChange={e => setBgColor(e.target.value)}
                   disabled={resizing}
                   className="absolute right-0 h-6 w-6 cursor-pointer opacity-0"
                   type="color"

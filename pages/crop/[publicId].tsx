@@ -31,7 +31,7 @@ export default function CropEditor({ url, width, height, publicId }: BaseProps) 
     loading: 'Compressing image',
     success: 'Image successfully compressed',
     shouldCancel: () => cropping || setCropping(true),
-    onSubmit: () => cropImage(publicId, crop),
+    onSubmit: () => cropImage({ publicId, ...crop }),
     onFinish: () => setCropping(false),
   });
 

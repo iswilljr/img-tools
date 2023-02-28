@@ -1,10 +1,5 @@
 import axios from 'redaxios';
-
-interface CompressBody {
-  publicId: string;
-  quality: number;
-  format: string;
-}
+import type { CompressBody } from '@/pages/api/editor/compress';
 
 export const compressImage = (body: CompressBody): Promise<BaseResponse> => {
   return axios.post('/api/editor/compress', body).then(res => res.data);

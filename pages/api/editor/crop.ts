@@ -4,7 +4,9 @@ import { cloudinary } from '@/utils/cloudinary';
 import { getResourceFromPublicId } from '@/utils/get-resource';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-const bodySchema = z.object({
+export type CropBody = z.infer<typeof cropBodySchema>;
+
+const cropBodySchema = z.object({
   publicId: z.string(),
   width: z.number().transform(Math.round),
   height: z.number().transform(Math.round),
@@ -13,7 +15,7 @@ const bodySchema = z.object({
 });
 
 async function cropImage(req: NextApiRequest, res: NextApiResponse<BaseResponse>) {
-  const { publicId, width, height, x, y } = bodySchema.parse(req.body);
+  const { publicId, width, height, x, y } = cropBodySchema.parse(req.body);
 
   const resource = await getResourceFromPublicId(publicId);
 

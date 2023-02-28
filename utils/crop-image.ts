@@ -1,6 +1,6 @@
 import axios from 'redaxios';
-import type { Crop } from 'react-image-crop';
+import type { CropBody } from '@/pages/api/editor/crop';
 
-export const cropImage = (publicId: string, crop: Crop): Promise<BaseResponse> => {
-  return axios.post('/api/editor/crop', { publicId, ...crop }).then(res => res.data);
+export const cropImage = (body: CropBody): Promise<BaseResponse> => {
+  return axios.post('/api/editor/crop', body).then(res => res.data);
 };

@@ -5,13 +5,15 @@ import { getResourceFromPublicId } from '@/utils/get-resource';
 import { formats } from '@/utils/formats';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-const bodySchema = z.object({
+export type ConvertBody = z.infer<typeof convertBodySchema>;
+
+const convertBodySchema = z.object({
   publicId: z.string(),
   format: z.enum(formats),
 });
 
-async function compressImage(req: NextApiRequest, res: NextApiResponse<BaseResponse>) {
-  const { publicId, format } = bodySchema.parse(req.body);
+async function convertImage(req: NextApiRequest, res: NextApiResponse<BaseResponse>) {
+  const { publicId, format } = convertBodySchema.parse(req.body);
 
   const resource = await getResourceFromPublicId(publicId);
 
@@ -26,4 +28,4 @@ async function compressImage(req: NextApiRequest, res: NextApiResponse<BaseRespo
   res.json({ publicId: img.public_id, url: img.secure_url });
 }
 
-export default apiHandler(compressImage);
+export default apiHandler(convertImage);

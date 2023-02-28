@@ -1,3 +1,5 @@
+export type Format = (typeof formats)[number];
+
 export const formats = [
   'avif',
   'bmp',

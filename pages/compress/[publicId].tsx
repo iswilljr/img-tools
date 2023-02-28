@@ -7,11 +7,15 @@ import { Input } from '@/components/Input';
 import { Select } from '@/components/Select';
 import { Editor } from '@/components/Editor';
 
+type Format = (typeof formats)[number];
+
+const formats = ['png', 'jpg', 'webp', 'avif'] as const;
+
 export default function CompressEditor({ url, width, height, publicId }: BaseProps) {
   const [compressing, setCompressing] = useState(false);
   const [qualityValue, setQuality] = useState(80);
   const [quality] = useDebounce(qualityValue, 300);
-  const [format, setFormat] = useState('png');
+  const [format, setFormat] = useState<Format>('png');
 
   const handleSubmit = useSubmit({
     publicId,
@@ -67,9 +71,9 @@ export default function CompressEditor({ url, width, height, publicId }: BasePro
       <Select
         id="format"
         label="Format"
-        data={['png', 'jpg', 'webp', 'avif']}
+        data={formats}
         value={format}
-        onChange={e => setFormat(e.target.value)}
+        onChange={e => setFormat(e.target.value as Format)}
       />
     </Editor>
   );

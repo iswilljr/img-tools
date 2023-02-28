@@ -4,14 +4,16 @@ import { cloudinary } from '@/utils/cloudinary';
 import { getResourceFromPublicId } from '@/utils/get-resource';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-const bodySchema = z.object({
+export type CompressBody = z.infer<typeof compressBodySchema>;
+
+const compressBodySchema = z.object({
   publicId: z.string(),
   quality: z.number().min(5).max(100),
   format: z.enum(['png', 'jpg', 'webp', 'avif']),
 });
 
 async function compressImage(req: NextApiRequest, res: NextApiResponse<BaseResponse>) {
-  const { publicId, quality, format } = bodySchema.parse(req.body);
+  const { publicId, quality, format } = compressBodySchema.parse(req.body);
 
   const resource = await getResourceFromPublicId(publicId);
 

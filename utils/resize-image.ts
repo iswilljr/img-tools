@@ -1,12 +1,6 @@
 import axios from 'redaxios';
+import type { ResizeBody } from '@/pages/api/editor/resize';
 
-interface Body {
-  publicId: string;
-  width: number;
-  height: number;
-  color: string;
-}
-
-export const resizeImage = (body: Body): Promise<BaseResponse> => {
+export const resizeImage = (body: ResizeBody): Promise<BaseResponse> => {
   return axios.post('/api/editor/resize', body).then(res => res.data);
 };

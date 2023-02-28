@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
-import { formats } from '@/utils/formats';
+import { formats, type Format } from '@/utils/formats';
 import { Editor } from '@/components/Editor';
 import { Select } from '@/components/Select';
 import { useSubmit } from '@/hooks/use-submit';
@@ -8,7 +8,7 @@ import { convertImage } from '@/utils/convert-image';
 
 export default function ConvertEditor({ url, width, height, publicId }: BaseProps) {
   const [converting, setConverting] = useState(false);
-  const [format, setFormat] = useState('png');
+  const [format, setFormat] = useState<Format>('png');
 
   const handleSubmit = useSubmit({
     publicId,
@@ -34,7 +34,7 @@ export default function ConvertEditor({ url, width, height, publicId }: BaseProp
         label="Choose the Format"
         data={formats}
         value={format}
-        onChange={e => setFormat(e.target.value)}
+        onChange={e => setFormat(e.target.value as Format)}
       />
     </Editor>
   );
