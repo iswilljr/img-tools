@@ -4,7 +4,7 @@ import { useDebounce } from 'use-debounce';
 import { compressImage } from '@/utils/compress-image';
 import { useSubmit } from '@/hooks/use-submit';
 import { Input } from '@/components/Input';
-import { SelectInput } from '@/components/Select';
+import { Select } from '@/components/Select';
 import { Editor } from '@/components/Editor';
 
 export default function CompressEditor({ url, width, height, publicId }: BaseProps) {
@@ -64,10 +64,11 @@ export default function CompressEditor({ url, width, height, publicId }: BasePro
           </>
         }
       />
-      <SelectInput
+      <Select
         id="format"
         label="Format"
         data={['png', 'jpg', 'webp', 'avif']}
+        value={format}
         onChange={e => setFormat(e.target.value)}
       />
     </Editor>

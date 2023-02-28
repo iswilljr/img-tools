@@ -1,12 +1,12 @@
 import clsx from 'clsx';
 
-interface SelectInputProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   id: string;
   label: string;
-  data: string[];
+  data: readonly string[];
 }
 
-export function SelectInput({ label, data, className, ...props }: SelectInputProps) {
+export function Select({ label, data, className, ...props }: SelectProps) {
   return (
     <div className="mt-2 flex flex-col gap-2">
       <label className="text-md" htmlFor="format">
