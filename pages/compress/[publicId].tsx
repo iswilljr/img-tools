@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import { useDebounce } from 'use-debounce';
+import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
 import { compressImage } from '@/utils/compress-image';
 import { useSubmit } from '@/hooks/use-submit';
 import { Input } from '@/components/Input';
@@ -11,11 +11,12 @@ type Format = (typeof formats)[number];
 
 const formats = ['png', 'jpg', 'webp', 'avif'] as const;
 
-export default function CompressEditor({ url, width, height, publicId }: BaseProps) {
+export default function CompressEditor({ url, width, height, publicId, bytes }: BaseProps) {
   const [compressing, setCompressing] = useState(false);
   const [qualityValue, setQuality] = useState(80);
   const [quality] = useDebounce(qualityValue, 300);
   const [format, setFormat] = useState<Format>('png');
+  const [outputSize, setOutputSize] = useState(bytes);
 
   const handleSubmit = useSubmit({
     publicId,
@@ -28,19 +29,49 @@ export default function CompressEditor({ url, width, height, publicId }: BasePro
     onFinish: () => setCompressing(false),
   });
 
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_IMAGES_URL as string}/q_${quality},f_${format}/${publicId}`)
+      .then(res => res.blob())
+      .then(blob => setOutputSize(blob.size));
+  }, [format, publicId, quality]);
+
   return (
     <Editor
       formButtonProps={{ label: 'Compress', disabled: compressing }}
       onReset={() => setQuality(80)}
       onSubmit={handleSubmit}
       content={
-        <Image
-          priority
-          src={`${process.env.NEXT_PUBLIC_IMAGES_URL as string}/q_${quality},f_${format}/${publicId}`}
-          width={width}
-          height={height}
-          alt="Compress me"
-        />
+        <div className="relative flex h-full w-full flex-col items-center justify-center gap-10">
+          <div className="top-0 z-10 flex w-full items-center justify-between bg-dark-11 sm:absolute">
+            <p>
+              Original: <strong>{`${(bytes / 1000).toFixed(2)} KB`}</strong>
+            </p>
+            <p>
+              Compressed: <strong>{`${(outputSize / 1000).toFixed(2)} KB`}</strong>
+            </p>
+          </div>
+          <ReactCompareSlider
+            style={{ width, height }}
+            itemOne={
+              <ReactCompareSliderImage
+                className="bg-dark-11"
+                src={url}
+                width={width}
+                height={height}
+                alt="Compress me"
+              />
+            }
+            itemTwo={
+              <ReactCompareSliderImage
+                className="bg-dark-11"
+                src={`${process.env.NEXT_PUBLIC_IMAGES_URL as string}/q_${quality},f_${format}/${publicId}`}
+                width={width}
+                height={height}
+                alt="Compressed"
+              />
+            }
+          />
+        </div>
       }
     >
       <h2 className="mb-4 text-2xl font-semibold">Compress Options</h2>
