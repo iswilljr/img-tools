@@ -11,7 +11,7 @@ export interface SectionProps {
 
 export function Section({ title, description, icon: Icon, tryItOut }: SectionProps) {
   return (
-    <section className="relative w-full sm:last:col-span-2">
+    <section className="relative w-full">
       <div className="flex h-full flex-col justify-between gap-4 odd:lg:flex-row-reverse even:lg:flex-row">
         <Link className="group relative w-full pb-6" href={tryItOut}>
           <h2 className="mt-5 flex items-center text-left text-3xl font-semibold leading-[1.15] text-primary-6 sm:text-5xl sm:leading-[1.15]">

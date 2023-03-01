@@ -5,6 +5,7 @@ import { Dropzone } from '@/components/Dropzone';
 import { SectionInfo, type SectionInfoProps } from '@/components/SectionInfo';
 import { uploadFile } from '@/utils/upload';
 import { useRouter } from 'next/router';
+import { Translate } from './Translate';
 
 interface SectionHomeProps extends SectionInfoProps {
   editor: string;
@@ -25,7 +26,7 @@ export function SectionHome({ title, description, highlight, editor, guide }: Se
   };
 
   return (
-    <>
+    <Translate>
       <SectionInfo {...{ title, description, highlight }} />
       <Dropzone accept={{ 'image/*': [] }} onFileAccepted={defaultHandler} />
       <div className="mx-auto mt-2 w-full max-w-md px-6 sm:max-w-4xl">
@@ -54,6 +55,6 @@ export function SectionHome({ title, description, highlight, editor, guide }: Se
           </li>
         </ol>
       </div>
-    </>
+    </Translate>
   );
 }
