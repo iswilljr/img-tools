@@ -77,15 +77,15 @@ export const tools = {
   },
 } satisfies Record<string, ToolProps>;
 
-export const urlToImg: ToolProps = {
-  title: 'URL to Image',
+export const urlToImgTool: ToolProps = {
+  title: 'Convert Web page to Image',
   description:
     'Convert webpage to image or png files with this free online Webpage to Image converter. Convert website to image easily with high quality.',
   shortDescription: 'Convert a URL into an Image in the favorite format for taking screenshots of websites.',
-  editor: 'remove-bg',
-  highlight: 'remove|background',
+  editor: 'url-2-img',
+  highlight: 'web page|image',
   guide: {
-    title: 'How To Remove Background from an Image?',
+    title: 'How To Convert an URL to Image?',
     step: 'Enter web page URL to convert to an Image.',
   },
 };

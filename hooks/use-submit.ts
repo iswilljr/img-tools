@@ -25,7 +25,7 @@ export function useSubmit(options: UseSubmitOptions) {
 
       toast
         .promise(onSubmit(), {
-          error: err => err.data.message ?? err.message ?? defaultError,
+          error: err => err.data?.message ?? err.message ?? defaultError,
           loading,
           success,
         })

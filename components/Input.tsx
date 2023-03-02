@@ -3,13 +3,15 @@ import clsx from 'clsx';
 interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'id'> {
   id: string;
   label: React.ReactNode;
+  labelProps?: Omit<React.LabelHTMLAttributes<HTMLLabelElement>, 'htmlFor'>;
 }
 
-export function Input({ className, label, ...props }: InputProps) {
+export function Input({ className, label, labelProps, ...props }: InputProps) {
   return (
     <div className="group relative mt-2">
       <label
-        className={clsx('text-md', {
+        {...labelProps}
+        className={clsx('text-md', labelProps?.className, {
           'text-white/50': props.disabled,
         })}
         htmlFor={props.name ?? props.id}

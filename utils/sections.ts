@@ -8,7 +8,7 @@ import {
   IconRotate,
   IconTexture,
 } from '@tabler/icons-react';
-import { tools, urlToImg } from './tools';
+import { tools, urlToImgTool } from './tools';
 
 export const sections: SectionProps[] = [
   {
@@ -18,8 +18,8 @@ export const sections: SectionProps[] = [
     icon: IconTexture,
   },
   {
-    title: 'URL to Img',
-    description: urlToImg.description,
+    title: 'Url to Img',
+    description: urlToImgTool.description,
     tryItOut: '/url-2-img',
     icon: IconLink,
   },

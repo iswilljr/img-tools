@@ -12,6 +12,8 @@ export function apiHandler(handler: NextApiHandler): NextApiHandler {
     } catch (error: any) {
       const message = Array.isArray(error.errors)
         ? getZodError(error.errors[0])
+        : typeof error.http_code === 'number'
+        ? 'Error loading resource'
         : error.message ?? 'Something went wrong';
 
       res.status(400).json({ message });
