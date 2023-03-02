@@ -9,6 +9,7 @@ import { useSubmit } from '@/hooks/use-submit';
 import { CheckboxButton } from '@/components/CheckboxButton';
 import { Editor } from '@/components/Editor';
 import { Range } from '@/components/Range';
+import { IconHourglassHigh } from '@tabler/icons-react';
 
 export default function RotateEditor({ url, width, height, publicId }: BaseProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -77,6 +78,7 @@ export default function RotateEditor({ url, width, height, publicId }: BaseProps
         <CheckboxButton
           id="horizontally"
           label="Horizontally"
+          icon={<IconHourglassHigh className="rotate-90" />}
           checked={horizontallyFlipped}
           disabled={rotating}
           onClick={() => setHorizontallyFlipped(o => !o)}
@@ -84,6 +86,7 @@ export default function RotateEditor({ url, width, height, publicId }: BaseProps
         <CheckboxButton
           id="vertically"
           label="Vertically"
+          icon={<IconHourglassHigh />}
           checked={verticallyFlipped}
           disabled={rotating}
           onClick={() => setVerticallyFlipped(o => !o)}
