@@ -16,6 +16,9 @@ export default function CropEditor({ url, width, height, publicId }: BaseProps) 
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const id = e.target.id;
       const value = e.target.valueAsNumber;
+
+      if (Number.isNaN(value)) return;
+
       const maxValue = id === 'width' || id === 'x' ? width : height;
       const nextValue = value >= 0 && value <= maxValue ? value : value > maxValue ? maxValue : 0;
 
