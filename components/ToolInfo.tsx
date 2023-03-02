@@ -1,9 +1,10 @@
 import { NextSeo } from 'next-seo';
 import { Shadow } from './Shadow';
 
-export interface SectionInfoProps {
+export interface ToolInfoProps {
   title: string;
   description: string;
+  shortDescription?: string;
   highlight: string;
 }
 
@@ -13,7 +14,7 @@ function getTokens(title: string, highlight: string) {
   return title.split(regexp).map(str => ({ str, highlighted: regexp.test(str) }));
 }
 
-export function SectionInfo({ title, description, highlight }: SectionInfoProps) {
+export function ToolInfo({ title, description, shortDescription, highlight }: ToolInfoProps) {
   const tokens = getTokens(title, highlight);
 
   return (
@@ -30,7 +31,7 @@ export function SectionInfo({ title, description, highlight }: SectionInfoProps)
           )
         )}
       </h1>
-      <p className="mx-auto mt-2 max-w-md text-lg sm:max-w-xl">{description}</p>
+      <p className="mx-auto mt-2 max-w-md text-lg sm:max-w-xl">{shortDescription ?? description}</p>
       <Shadow />
     </section>
   );

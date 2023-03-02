@@ -2,12 +2,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Dropzone } from '@/components/Dropzone';
-import { SectionInfo, type SectionInfoProps } from '@/components/SectionInfo';
+import { ToolInfo, type ToolInfoProps } from '@/components/ToolInfo';
 import { uploadFile } from '@/utils/upload';
 import { useRouter } from 'next/router';
 import { Translate } from './Translate';
 
-interface SectionHomeProps extends SectionInfoProps {
+export interface ToolProps extends ToolInfoProps {
   editor: string;
   guide: {
     title: string;
@@ -15,7 +15,7 @@ interface SectionHomeProps extends SectionInfoProps {
   };
 }
 
-export function SectionHome({ title, description, highlight, editor, guide }: SectionHomeProps) {
+export function Tool({ title, description, shortDescription, highlight, editor, guide }: ToolProps) {
   const router = useRouter();
 
   const label = `${editor} the example image`;
@@ -27,7 +27,7 @@ export function SectionHome({ title, description, highlight, editor, guide }: Se
 
   return (
     <Translate>
-      <SectionInfo {...{ title, description, highlight }} />
+      <ToolInfo {...{ title, description, shortDescription, highlight }} />
       <Dropzone accept={{ 'image/*': [] }} onFileAccepted={defaultHandler} />
       <div className="mx-auto mt-2 w-full max-w-md px-6 sm:max-w-4xl">
         <p className="flex items-center justify-center text-center">
