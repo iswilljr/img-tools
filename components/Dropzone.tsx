@@ -10,6 +10,8 @@ export interface DropzoneProps {
   onFileAccepted: (file: File) => Promise<void>;
 }
 
+const MAX_FILE_SIZE = 1000 ** 2;
+
 export function Dropzone({ accept, onFileAccepted }: DropzoneProps) {
   const [disabled, setDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -17,8 +19,10 @@ export function Dropzone({ accept, onFileAccepted }: DropzoneProps) {
 
   const { getRootProps, getInputProps, isDragActive, isDragReject } = useDropzone({
     multiple: false,
+    maxSize: MAX_FILE_SIZE,
     accept,
-    onDropRejected: fileRejections => setError(fileRejections[0].errors[0].message.replaceAll('/*', '')),
+    onDropRejected: fileRejections =>
+      setError(fileRejections[0].errors[0].message.replaceAll('/*', '').replace(`${MAX_FILE_SIZE} bytes`, '1 MB')),
     onDropAccepted: files => {
       setError('');
       setLoading(true);
