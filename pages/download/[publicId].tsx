@@ -18,7 +18,7 @@ interface DownloadProps {
   editor?: string | null;
 }
 
-const actions: Action[] = sections.map(section => ({
+const actions: Action[] = sections.slice(2).map(section => ({
   ...section,
   title: `${section.title} this image`,
 }));

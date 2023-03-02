@@ -12,6 +12,8 @@ export interface ToolProps extends ToolInfoProps {
   guide: {
     title: string;
     step: string;
+    buttonLabel?: string;
+    label?: string;
   };
 }
 
@@ -50,8 +52,10 @@ export function Tool({ title, description, shortDescription, highlight, editor, 
           <li>{guide.step}</li>
           <li>
             Click the{' '}
-            <strong className="font-bold">&quot;{`${editor.at(0)!.toUpperCase()}${editor.slice(1)}`}&quot;</strong>{' '}
-            button to {editor} your image.
+            <strong className="font-bold">
+              &quot;{guide.buttonLabel ?? `${editor.at(0)!.toUpperCase()}${editor.slice(1)}`}&quot;
+            </strong>{' '}
+            button to {guide.label ?? editor} your image.
           </li>
         </ol>
       </div>

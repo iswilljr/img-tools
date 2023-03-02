@@ -1,8 +1,28 @@
 import type { SectionProps } from '@/components/Section';
-import { IconArrowsMaximize, IconArrowsMinimize, IconCrop, IconPhoto, IconRotate } from '@tabler/icons-react';
-import { tools } from './tools';
+import {
+  IconArrowsMaximize,
+  IconArrowsMinimize,
+  IconCrop,
+  IconLink,
+  IconPhoto,
+  IconRotate,
+  IconTexture,
+} from '@tabler/icons-react';
+import { tools, urlToImg } from './tools';
 
 export const sections: SectionProps[] = [
+  {
+    title: 'Remove Bg',
+    description: tools['remove-bg'].description,
+    tryItOut: '/remove-bg',
+    icon: IconTexture,
+  },
+  {
+    title: 'URL to Img',
+    description: urlToImg.description,
+    tryItOut: '/url-2-img',
+    icon: IconLink,
+  },
   {
     title: 'Crop',
     description: tools.crop.description,

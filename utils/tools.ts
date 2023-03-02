@@ -61,7 +61,34 @@ export const tools = {
       step: 'Click on the rotate buttons to rotate the image.',
     },
   },
+  'remove-bg': {
+    title: 'Remove Image Background',
+    description:
+      'Remove the background from images online with this free background remover. Download your transparent background image and change the background.',
+    shortDescription: 'Easily remove the background from photos, get transparent backgrounds instantly.',
+    editor: 'remove-bg',
+    highlight: 'remove|background',
+    guide: {
+      title: 'How To Remove Background from an Image?',
+      step: 'Upload your image to automatically remove the background in an instant.',
+      label: 'remove the background from',
+      buttonLabel: 'Remove Background',
+    },
+  },
 } satisfies Record<string, ToolProps>;
+
+export const urlToImg: ToolProps = {
+  title: 'URL to Image',
+  description:
+    'Convert webpage to image or png files with this free online Webpage to Image converter. Convert website to image easily with high quality.',
+  shortDescription: 'Convert a URL into an Image in the favorite format for taking screenshots of websites.',
+  editor: 'remove-bg',
+  highlight: 'remove|background',
+  guide: {
+    title: 'How To Remove Background from an Image?',
+    step: 'Enter web page URL to convert to an Image.',
+  },
+};
 
 export const {
   compress: compressTool,
@@ -69,4 +96,5 @@ export const {
   crop: cropTool,
   resize: resizeTool,
   rotate: rotateTool,
+  'remove-bg': removeBgTool,
 } = tools;
