@@ -47,11 +47,9 @@ export default function Download({ result, from, editor }: DownloadProps) {
       />
       <Button
         className=" mx-auto mt-20 flex !w-fit items-center justify-center px-12"
+        icon={<IconDownload />}
         onClick={() => downloadImage(result.url)}
       >
-        <span className="mr-2">
-          <IconDownload />
-        </span>
         Download
       </Button>
       <div className="mx-auto w-fit max-w-md px-6 pb-6 sm:max-w-4xl">

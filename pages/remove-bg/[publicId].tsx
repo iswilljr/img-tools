@@ -85,16 +85,10 @@ export default function RemoveBackgroundEditor({ url, originalUrl, publicId }: R
             itemTwo={<ReactCompareSliderImage className="h-auto w-full bg-dark-11" src={url} alt="Compressed" />}
           />
           <form onSubmit={handleSubmit}>
-            <Button type="submit" className="flex items-center justify-center">
-              <span className="mr-2">
-                <IconUpload />
-              </span>
+            <Button type="submit" icon={<IconUpload />}>
               Upload and Edit
             </Button>
-            <Button type="button" className="flex items-center justify-center" onClick={() => downloadImage(url)}>
-              <span className="mr-2">
-                <IconDownload />
-              </span>
+            <Button type="button" icon={<IconDownload />} onClick={() => downloadImage(url)}>
               Download
             </Button>
           </form>
