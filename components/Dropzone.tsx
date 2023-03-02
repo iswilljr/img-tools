@@ -52,7 +52,7 @@ export function Dropzone({ accept, onFileAccepted }: DropzoneProps) {
         </div>
         <div className="rounded-lg border border-dashed border-white">
           <div {...getRootProps()} className="p-6 focus:outline-white">
-            <input disabled={disabled} {...getInputProps()} />
+            <input disabled={loading || disabled} {...getInputProps()} />
             <div className="mx-auto flex flex-col items-center justify-center space-y-2">
               <IconUpload size={120} />
               <p className="capitalize">Drop your image here</p>
