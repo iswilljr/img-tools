@@ -17,13 +17,7 @@ interface RemoveBackgroundEditorProps extends BaseProps {
 
 const MAX_TRIES = 5;
 
-export default function RemoveBackgroundEditor({
-  url,
-  originalUrl,
-  width,
-  height,
-  publicId,
-}: RemoveBackgroundEditorProps) {
+export default function RemoveBackgroundEditor({ url, originalUrl, publicId }: RemoveBackgroundEditorProps) {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -59,7 +53,7 @@ export default function RemoveBackgroundEditor({
               if (value >= MAX_TRIES) setError('Could not remove background');
               return value;
             }),
-          5000
+          3000
         );
       });
 
