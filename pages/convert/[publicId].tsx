@@ -5,6 +5,7 @@ import { Editor } from '@/components/Editor';
 import { Select } from '@/components/Select';
 import { useSubmit } from '@/hooks/use-submit';
 import { convertImage } from '@/utils/convert-image';
+import { convertTool } from '@/utils/tools';
 
 export default function ConvertEditor({ url, width, height, publicId }: BaseProps) {
   const [converting, setConverting] = useState(false);
@@ -23,6 +24,7 @@ export default function ConvertEditor({ url, width, height, publicId }: BaseProp
 
   return (
     <Editor
+      tool={convertTool}
       formButtonProps={{ label: 'Convert', disabled: converting }}
       onReset={() => {}}
       onSubmit={handleSubmit}

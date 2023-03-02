@@ -4,6 +4,7 @@ import { toast } from 'react-hot-toast';
 import { upload } from '@/utils/upload';
 import { loadImage } from '@/utils/load-image';
 import { rotateImage } from '@/utils/rotate-image';
+import { rotateTool } from '@/utils/tools';
 import { useSubmit } from '@/hooks/use-submit';
 import { CheckboxButton } from '@/components/CheckboxButton';
 import { Editor } from '@/components/Editor';
@@ -49,6 +50,7 @@ export default function RotateEditor({ url, width, height, publicId }: BaseProps
 
   return (
     <Editor
+      tool={rotateTool}
       formButtonProps={{ label: 'Rotate', disabled: rotating }}
       onSubmit={handleSubmit}
       onReset={() => {

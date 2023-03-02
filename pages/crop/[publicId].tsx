@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 import Image from 'next/image';
 import ReactCrop, { type Crop } from 'react-image-crop';
 import { cropImage } from '@/utils/crop-image';
+import { cropTool } from '@/utils/tools';
 import { Input } from '@/components/Input';
 import { Editor } from '@/components/Editor';
 import { useSubmit } from '@/hooks/use-submit';
@@ -42,6 +43,7 @@ export default function CropEditor({ url, width, height, publicId }: BaseProps) 
 
   return (
     <Editor
+      tool={cropTool}
       formButtonProps={{ label: 'Crop', disabled: cropping }}
       onReset={() => setCrop({ width, height, unit: 'px', x: 0, y: 0 })}
       onSubmit={handleSubmit}

@@ -62,3 +62,11 @@ export const tools = {
     },
   },
 } satisfies Record<string, ToolProps>;
+
+export const {
+  compress: compressTool,
+  convert: convertTool,
+  crop: cropTool,
+  resize: resizeTool,
+  rotate: rotateTool,
+} = tools;

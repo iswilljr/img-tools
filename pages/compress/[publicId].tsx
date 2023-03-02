@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDebounce } from 'use-debounce';
 import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
 import { compressImage } from '@/utils/compress-image';
+import { compressTool } from '@/utils/tools';
 import { useSubmit } from '@/hooks/use-submit';
 import { Select } from '@/components/Select';
 import { Editor } from '@/components/Editor';
@@ -37,6 +38,7 @@ export default function CompressEditor({ url, width, height, publicId, bytes }: 
 
   return (
     <Editor
+      tool={compressTool}
       formButtonProps={{ label: 'Compress', disabled: compressing }}
       onReset={() => setQuality(80)}
       onSubmit={handleSubmit}

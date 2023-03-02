@@ -3,6 +3,7 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import { Input } from '@/components/Input';
 import { resizeImage } from '@/utils/resize-image';
+import { resizeTool } from '@/utils/tools';
 import { Editor } from '@/components/Editor';
 import { useSubmit } from '@/hooks/use-submit';
 
@@ -50,6 +51,7 @@ export default function ResizeEditor({ url, width: initialWidth, height: initial
 
   return (
     <Editor
+      tool={resizeTool}
       formButtonProps={{ label: 'Resize', disabled: resizing }}
       onReset={() => {
         setWidth(initialWidth);
