@@ -71,8 +71,8 @@ export const tools = {
     guide: {
       title: 'How To Remove Background from an Image?',
       step: 'Upload your image to automatically remove the background in an instant.',
-      label: 'remove the background from',
-      buttonLabel: 'Remove Background',
+      label: 'save',
+      buttonLabel: 'Download',
     },
   },
 } satisfies Record<string, ToolProps>;
