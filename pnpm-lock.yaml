@@ -25,6 +25,7 @@ specifiers:
   husky: 8.0.3
   lint-staged: 13.1.2
   next: 13.2.1
+  next-seo: 5.15.0
   nextjs-progressbar: 0.0.16
   postcss: 8.4.21
   prettier: 2.8.4
@@ -47,6 +48,7 @@ dependencies:
   clsx: 1.2.1
   framer-motion: 10.0.1_biqbaboplfbrettd7655fr4n2y
   next: 13.2.1_biqbaboplfbrettd7655fr4n2y
+  next-seo: 5.15.0_qgtcjgzkkjtbiyvnx7d32fl5vu
   nextjs-progressbar: 0.0.16_next@13.2.1+react@18.2.0
   react: 18.2.0
   react-compare-slider: 2.2.0_biqbaboplfbrettd7655fr4n2y
@@ -2531,6 +2533,18 @@ packages:
     engines: {node: '>= 0.4.0'}
     dev: false
     optional: true
+
+  /next-seo/5.15.0_qgtcjgzkkjtbiyvnx7d32fl5vu:
+    resolution: {integrity: sha512-LGbcY91yDKGMb7YI+28n3g+RuChUkt6pXNpa8FkfKkEmNiJkeRDEXTnnjVtwT9FmMhG6NH8qwHTelGrlYm9rgg==}
+    peerDependencies:
+      next: ^8.1.1-canary.54 || >=9.0.0
+      react: '>=16.0.0'
+      react-dom: '>=16.0.0'
+    dependencies:
+      next: 13.2.1_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
 
   /next/13.2.1_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-qhgJlDtG0xidNViJUPeQHLGJJoT4zDj/El7fP3D3OzpxJDUfxsm16cK4WTMyvSX1ciIfAq05u+0HqFAa+VJ+Hg==}

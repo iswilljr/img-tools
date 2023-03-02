@@ -1,6 +1,7 @@
-import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import { Inter } from 'next/font/google';
+import { DefaultSeo } from 'next-seo';
+import { defaultSeo } from '@/next-seo.config';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import type { AppProps } from 'next/app';
@@ -16,10 +17,7 @@ const inter = Inter({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <div className={inter.className}>
-      <Head>
-        <title>Image Tools</title>
-        <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
-      </Head>
+      <DefaultSeo {...defaultSeo} />
       <Header />
       <main className="min-h-[calc(100vh-64px)]">
         <Component {...pageProps} />
