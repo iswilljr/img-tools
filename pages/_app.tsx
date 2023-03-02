@@ -6,8 +6,8 @@ import { Footer } from '@/components/Footer';
 import type { AppProps } from 'next/app';
 import '@/styles/globals.css';
 
-const Toaster = dynamic(() => import('react-hot-toast').then(module => module.Toaster));
-const Progress = dynamic(() => import('nextjs-progressbar'));
+const Toaster = dynamic(() => import('react-hot-toast').then(module => module.Toaster), { ssr: false });
+const Progress = dynamic(() => import('nextjs-progressbar'), { ssr: false });
 
 const inter = Inter({
   subsets: ['latin'],
