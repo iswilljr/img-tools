@@ -6,8 +6,8 @@ import { loadImage } from '@/utils/load-image';
 import { rotateImage } from '@/utils/rotate-image';
 import { useSubmit } from '@/hooks/use-submit';
 import { CheckboxButton } from '@/components/CheckboxButton';
-import { Input } from '@/components/Input';
 import { Editor } from '@/components/Editor';
+import { Range } from '@/components/Range';
 
 export default function RotateEditor({ url, width, height, publicId }: BaseProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -60,10 +60,9 @@ export default function RotateEditor({ url, width, height, publicId }: BaseProps
     >
       <div>
         <h2 className="text-2xl font-semibold">Rotate Image</h2>
-        <Input
+        <Range
           id="degrees"
-          label="Degrees"
-          type="range"
+          labelLeft="Degrees"
           min={0}
           max={360}
           value={degrees}

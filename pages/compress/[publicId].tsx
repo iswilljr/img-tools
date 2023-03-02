@@ -3,9 +3,9 @@ import { useDebounce } from 'use-debounce';
 import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
 import { compressImage } from '@/utils/compress-image';
 import { useSubmit } from '@/hooks/use-submit';
-import { Input } from '@/components/Input';
 import { Select } from '@/components/Select';
 import { Editor } from '@/components/Editor';
+import { Range } from '@/components/Range';
 
 type Format = (typeof formats)[number];
 
@@ -75,29 +75,15 @@ export default function CompressEditor({ url, width, height, publicId, bytes }: 
       }
     >
       <h2 className="mb-4 text-2xl font-semibold">Compress Options</h2>
-      <Input
+      <Range
         id="quality"
-        type="range"
         min={5}
         max={100}
         value={qualityValue}
         onChange={e => setQuality(e.target.valueAsNumber)}
         disabled={compressing}
-        label={
-          <>
-            <span
-              className="min-w-6 absolute hidden h-6 items-center justify-center rounded bg-white p-1 text-black group-hover:flex"
-              id="indicator"
-              style={{ left: `clamp(0px, ${qualityValue - 5}% - 12px, 100% - 24px)` }}
-            >
-              {`${qualityValue}%`}
-            </span>
-            <div className="flex items-center justify-between">
-              <p>Best Compression</p>
-              <p>Best Quality</p>
-            </div>
-          </>
-        }
+        labelLeft="Best Compression"
+        labelRight="Best Quality"
       />
       <Select
         id="format"
