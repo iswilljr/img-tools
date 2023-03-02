@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Cloudinary } from '@cloudinary/url-gen';
 import { useDebounce } from 'use-debounce';
 import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
 import { compressImage } from '@/utils/compress-image';
@@ -11,6 +12,7 @@ import { Range } from '@/components/Range';
 type Format = (typeof formats)[number];
 
 const formats = ['png', 'jpg', 'webp', 'avif'] as const;
+const cloudinary = new Cloudinary({ cloud: { cloudName: process.env.NEXT_PUBLIC_CLOUD_NAME } });
 
 export default function CompressEditor({ url, width, height, publicId, bytes }: BaseProps) {
   const [compressing, setCompressing] = useState(false);
@@ -31,7 +33,7 @@ export default function CompressEditor({ url, width, height, publicId, bytes }: 
   });
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_IMAGES_URL as string}/q_${quality},f_${format}/${publicId}`)
+    fetch(cloudinary.image(publicId).quality(quality).format(format).toURL())
       .then(res => res.blob())
       .then(blob => setOutputSize(blob.size));
   }, [format, publicId, quality]);
@@ -66,7 +68,7 @@ export default function CompressEditor({ url, width, height, publicId, bytes }: 
             itemTwo={
               <ReactCompareSliderImage
                 className="bg-dark-11"
-                src={`${process.env.NEXT_PUBLIC_IMAGES_URL as string}/q_${quality},f_${format}/${publicId}`}
+                src={cloudinary.image(publicId).quality(quality).format(format).toURL()}
                 width={width}
                 height={height}
                 alt="Compressed"
