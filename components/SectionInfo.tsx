@@ -1,3 +1,4 @@
+import { NextSeo } from 'next-seo';
 import { Shadow } from './Shadow';
 
 export interface SectionInfoProps {
@@ -17,6 +18,7 @@ export function SectionInfo({ title, description, highlight }: SectionInfoProps)
 
   return (
     <section className="relative mx-auto my-10 w-fit px-6 text-center">
+      <NextSeo title={title} description={description} />
       <h1 className="mx-auto text-4xl font-bold">
         {tokens.map((value, i) =>
           value.highlighted ? (
