@@ -67,7 +67,7 @@ export default function ResizeEditor({ url, width: initialWidth, height: initial
         label="Width"
         type="number"
         value={width}
-        onChange={e => handleDimensionsChange(e, width, height, setWidth, setHeight)}
+        onChange={e => handleDimensionsChange(e, initialWidth, initialHeight, setWidth, setHeight)}
         disabled={resizing}
       />
       <Input
@@ -75,7 +75,7 @@ export default function ResizeEditor({ url, width: initialWidth, height: initial
         label="Height"
         type="number"
         value={height}
-        onChange={e => handleDimensionsChange(e, height, width, setHeight, setWidth)}
+        onChange={e => handleDimensionsChange(e, initialHeight, initialWidth, setHeight, setWidth)}
         disabled={resizing}
       />
       <div className={clsx('mt-3 flex items-center gap-2', { 'text-white/50': resizing })}>
