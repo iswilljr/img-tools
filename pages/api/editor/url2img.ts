@@ -9,12 +9,14 @@ const url2imgBodySchema = z.object({
   url: z.string().url(),
 });
 
+const cloudName = process.env.CLOUD_NAME ?? process.env.NEXT_PUBLIC_CLOUD_NAME;
+
 async function convertUrlToImage(req: NextApiRequest, res: NextApiResponse<BaseResponse>) {
   const { url } = url2imgBodySchema.parse(req.body);
 
   const compressedImageUrl = cloudinary.url(url, {
     type: 'url2png',
-    cloud_name: process.env.CLOUD_NAME,
+    cloud_name: cloudName,
   });
 
   const img = await cloudinary.uploader.upload(compressedImageUrl);
