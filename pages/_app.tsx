@@ -4,7 +4,7 @@ import { DefaultSeo } from 'next-seo';
 import { defaultSeo } from '@/next-seo.config';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { CanonicalUrl } from '@/components/CanonicalUrl';
+import { ExtraSeo } from '@/components/ExtraSeo';
 import type { AppProps } from 'next/app';
 import '@/styles/globals.css';
 
@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <div className={inter.className}>
       <DefaultSeo {...defaultSeo} />
-      <CanonicalUrl />
+      <ExtraSeo />
       <Header />
       <main className="min-h-[calc(100vh-64px)]">
         <Component {...pageProps} />
