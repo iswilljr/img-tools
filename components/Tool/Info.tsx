@@ -1,5 +1,5 @@
 import { NextSeo } from 'next-seo';
-import { Shadow } from './Shadow';
+import { Shadow } from '../Shadow';
 
 export interface ToolInfoProps {
   title: string;
@@ -14,7 +14,7 @@ function getTokens(title: string, highlight: string) {
   return title.split(regexp).map(str => ({ str, highlighted: regexp.test(str) }));
 }
 
-export function ToolInfo({ title, description, shortDescription, highlight }: ToolInfoProps) {
+export function Info({ title, description, shortDescription, highlight }: ToolInfoProps) {
   const tokens = getTokens(title, highlight);
 
   return (

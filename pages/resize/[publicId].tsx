@@ -1,10 +1,10 @@
 import { useCallback, useRef, useState } from 'react';
 import Image from 'next/image';
 import clsx from 'clsx';
-import { Input } from '@/components/Input';
+import { Input } from '@/components/Inputs/Input';
 import { resizeImage } from '@/utils/resize-image';
 import { resizeTool } from '@/utils/tools';
-import { Editor } from '@/components/Editor';
+import { Editor } from '@/components/Tool/Editor';
 import { useSubmit } from '@/hooks/use-submit';
 
 const getAspectRatioValue = (n: number, first: number, base: number) => {

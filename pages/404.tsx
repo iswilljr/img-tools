@@ -1,4 +1,4 @@
-import { Home } from '@/components/Home';
+import { Home } from '@/components/Layout/Home';
 
 export default function NotFound() {
   return (

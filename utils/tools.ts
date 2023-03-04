@@ -1,4 +1,4 @@
-import type { ToolProps } from '@/components/Tool';
+import type { ToolProps } from '@/components/Tool/Tool';
 
 export const tools = {
   compress: {

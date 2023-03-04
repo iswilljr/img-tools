@@ -2,7 +2,7 @@ import { IconHelp } from '@tabler/icons-react';
 import clsx from 'clsx';
 import { NextSeo } from 'next-seo';
 import { FormButtons, type FormButtonsProps } from './FormButtons';
-import { Guide } from './Guide';
+import { Guide } from '../Guide';
 import type { ToolProps } from './Tool';
 
 interface EditorProps extends React.FormHTMLAttributes<HTMLFormElement> {

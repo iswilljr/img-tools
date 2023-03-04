@@ -3,10 +3,10 @@ import { IconDownload, IconPencil, IconRotate } from '@tabler/icons-react';
 import { getResourceFromPublicId } from '@/utils/get-resource';
 import { downloadImage } from '@/utils/download-image';
 import { Button } from '@/components/Button';
-import { ToolInfo } from '@/components/ToolInfo';
+import { Info } from '@/components/Tool/Info';
 import { sections } from '@/utils/sections';
 import type { GetServerSideProps } from 'next';
-import type { SectionProps } from '@/components/Section';
+import type { SectionProps } from '@/components/Layout/Section';
 
 interface Action extends SectionProps {
   publicId?: string;
@@ -40,7 +40,7 @@ export default function Download({ result, from, editor }: DownloadProps) {
 
   return (
     <>
-      <ToolInfo
+      <Info
         title="Download your image"
         description="Click the download button to save your image"
         highlight="download"

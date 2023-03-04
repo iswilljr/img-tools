@@ -1,4 +1,4 @@
-import { Tool, type ToolProps } from '@/components/Tool';
+import { Tool, type ToolProps } from '@/components/Tool/Tool';
 import { tools } from '@/utils/tools';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 

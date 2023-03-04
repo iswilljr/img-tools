@@ -1,4 +1,4 @@
-import type { SectionProps } from '@/components/Section';
+import type { SectionProps } from '@/components/Layout/Section';
 import {
   IconArrowsMaximize,
   IconArrowsMinimize,

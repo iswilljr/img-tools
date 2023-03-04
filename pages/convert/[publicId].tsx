@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { formats, type Format } from '@/utils/formats';
-import { Editor } from '@/components/Editor';
-import { Select } from '@/components/Select';
+import { Editor } from '@/components/Tool/Editor';
+import { Select } from '@/components/Inputs/Select';
 import { useSubmit } from '@/hooks/use-submit';
 import { convertImage } from '@/utils/convert-image';
 import { convertTool } from '@/utils/tools';

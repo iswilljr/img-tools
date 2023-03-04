@@ -3,8 +3,8 @@ import Image from 'next/image';
 import ReactCrop, { type Crop } from 'react-image-crop';
 import { cropImage } from '@/utils/crop-image';
 import { cropTool } from '@/utils/tools';
-import { Input } from '@/components/Input';
-import { Editor } from '@/components/Editor';
+import { Input } from '@/components/Inputs/Input';
+import { Editor } from '@/components/Tool/Editor';
 import { useSubmit } from '@/hooks/use-submit';
 import 'react-image-crop/dist/ReactCrop.css';
 

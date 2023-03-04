@@ -5,9 +5,9 @@ import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slide
 import { compressImage } from '@/utils/compress-image';
 import { compressTool } from '@/utils/tools';
 import { useSubmit } from '@/hooks/use-submit';
-import { Select } from '@/components/Select';
-import { Editor } from '@/components/Editor';
-import { Range } from '@/components/Range';
+import { Select } from '@/components/Inputs/Select';
+import { Editor } from '@/components/Tool/Editor';
+import { Range } from '@/components/Inputs/Range';
 
 type Format = (typeof formats)[number];
 

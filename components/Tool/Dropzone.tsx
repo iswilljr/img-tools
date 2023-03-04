@@ -3,7 +3,7 @@ import { IconLoader, IconUpload } from '@tabler/icons-react';
 import { useDropzone, type Accept } from 'react-dropzone';
 import { toast } from 'react-hot-toast';
 import { useState } from 'react';
-import { Button } from './Button';
+import { Button } from '../Button';
 
 export interface DropzoneProps {
   accept: Accept;

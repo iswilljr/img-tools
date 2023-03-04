@@ -1,8 +1,8 @@
 import { IconDownload, IconLink, IconWand } from '@tabler/icons-react';
 import axios from 'redaxios';
 import { urlToImgTool } from '@/utils/tools';
-import { Input } from '@/components/Input';
-import { ToolInfo } from '@/components/ToolInfo';
+import { Input } from '@/components/Inputs/Input';
+import { Info } from '@/components/Tool/Info';
 import { Translate } from '@/components/Translate';
 import { Button } from '@/components/Button';
 import { useState } from 'react';
@@ -44,7 +44,7 @@ export default function UrlToImage() {
 
   return (
     <Translate className="relative mx-auto flex h-full min-h-[calc(100vh-64px)] w-full flex-col items-center justify-center overflow-x-hidden p-6 px-6 sm:max-w-4xl">
-      <ToolInfo {...urlToImgTool} />
+      <Info {...urlToImgTool} />
       <section className="w-full pb-6">
         <form onSubmit={handleSubmit}>
           <Input

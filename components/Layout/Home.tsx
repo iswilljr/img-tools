@@ -1,7 +1,7 @@
 import { sections } from '@/utils/sections';
 import { Section } from './Section';
-import { Shadow } from './Shadow';
-import { Translate } from './Translate';
+import { Shadow } from '../Shadow';
+import { Translate } from '../Translate';
 
 interface HomeProps {
   title: React.ReactNode;

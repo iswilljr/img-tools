@@ -6,9 +6,9 @@ import { loadImage } from '@/utils/load-image';
 import { rotateImage } from '@/utils/rotate-image';
 import { rotateTool } from '@/utils/tools';
 import { useSubmit } from '@/hooks/use-submit';
-import { CheckboxButton } from '@/components/CheckboxButton';
-import { Editor } from '@/components/Editor';
-import { Range } from '@/components/Range';
+import { CheckboxButton } from '@/components/Inputs/Checkbox';
+import { Editor } from '@/components/Tool/Editor';
+import { Range } from '@/components/Inputs/Range';
 import { IconHourglassHigh } from '@tabler/icons-react';
 
 export default function RotateEditor({ url, width, height, publicId }: BaseProps) {

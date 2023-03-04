@@ -1,6 +1,6 @@
-import { Shadow } from './Shadow';
-import type { TablerIconsProps } from '@tabler/icons-react';
 import Link from 'next/link';
+import { Shadow } from '../Shadow';
+import type { TablerIconsProps } from '@tabler/icons-react';
 
 export interface SectionProps {
   title: string;
