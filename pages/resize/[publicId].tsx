@@ -66,6 +66,7 @@ export default function ResizeEditor({ url, width: initialWidth, height: initial
         id="width"
         label="Width"
         type="number"
+        min={1}
         value={width}
         onChange={e => handleDimensionsChange(e, initialWidth, initialHeight, setWidth, setHeight)}
         disabled={resizing}
@@ -74,6 +75,7 @@ export default function ResizeEditor({ url, width: initialWidth, height: initial
         id="height"
         label="Height"
         type="number"
+        min={1}
         value={height}
         onChange={e => handleDimensionsChange(e, initialHeight, initialWidth, setHeight, setWidth)}
         disabled={resizing}
