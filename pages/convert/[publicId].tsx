@@ -28,7 +28,16 @@ export default function ConvertEditor({ url, width, height, publicId }: BaseProp
       formButtonProps={{ label: 'Convert', disabled: converting }}
       onReset={() => {}}
       onSubmit={handleSubmit}
-      content={<Image priority width={width} height={height} alt="Convert me" src={url} />}
+      content={
+        <Image
+          className="!h-auto !max-h-full !w-auto !max-w-full"
+          priority
+          width={width}
+          height={height}
+          alt="Convert me"
+          src={url}
+        />
+      }
     >
       <h2 className="mb-4 text-2xl font-semibold">Convert Options</h2>
       <Select

@@ -59,7 +59,17 @@ export default function ResizeEditor({ url, width: initialWidth, height: initial
         setLockAspectRatio(true);
       }}
       onSubmit={handleSubmit}
-      content={<Image priority width={initialWidth} height={initialHeight} ref={imgRef} alt="Resize me" src={url} />}
+      content={
+        <Image
+          className="!h-auto !max-h-full !w-auto !max-w-full"
+          priority
+          width={initialWidth}
+          height={initialHeight}
+          ref={imgRef}
+          alt="Resize me"
+          src={url}
+        />
+      }
     >
       <h2 className="text-2xl font-semibold">Resize Settings</h2>
       <Input

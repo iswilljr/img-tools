@@ -49,10 +49,10 @@ export default function CompressEditor({ url, width, height, publicId, bytes }: 
             </p>
           </div>
           <ReactCompareSlider
-            style={{ width, height }}
+            className="sm:mt-8"
             itemOne={
               <ReactCompareSliderImage
-                className="bg-dark-10"
+                className="!h-auto !max-h-full !w-auto !max-w-full bg-dark-10"
                 src={url}
                 width={width}
                 height={height}
@@ -61,7 +61,7 @@ export default function CompressEditor({ url, width, height, publicId, bytes }: 
             }
             itemTwo={
               <ReactCompareSliderImage
-                className="bg-dark-10"
+                className="!h-auto !max-h-full !w-auto !max-w-full bg-dark-10"
                 src={generator.image(publicId).quality(quality).format(format).toURL()}
                 width={width}
                 height={height}
