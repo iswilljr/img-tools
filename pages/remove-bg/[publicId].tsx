@@ -81,8 +81,8 @@ export default function RemoveBackgroundEditor({ url, originalUrl, publicId }: R
           </div>
           <ReactCompareSlider
             className="mx-auto"
-            itemOne={<ReactCompareSliderImage className="h-auto w-full bg-dark-11" src={originalUrl} alt="Original" />}
-            itemTwo={<ReactCompareSliderImage className="h-auto w-full bg-dark-11" src={url} alt="Compressed" />}
+            itemOne={<ReactCompareSliderImage className="h-auto w-full bg-dark-10" src={originalUrl} alt="Original" />}
+            itemTwo={<ReactCompareSliderImage className="h-auto w-full bg-dark-10" src={url} alt="Compressed" />}
           />
           <form onSubmit={handleSubmit}>
             <Button type="submit" icon={<IconUpload />}>

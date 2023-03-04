@@ -46,7 +46,7 @@ export default function CompressEditor({ url, width, height, publicId, bytes }: 
       onSubmit={handleSubmit}
       content={
         <div className="relative flex h-full w-full flex-col items-center justify-center gap-10">
-          <div className="top-0 z-10 flex w-full items-center justify-between bg-dark-11 sm:absolute">
+          <div className="top-0 z-10 flex w-full items-center justify-between bg-dark-10 sm:absolute">
             <p>
               Original: <strong>{`${(bytes / 1000).toFixed(2)} KB`}</strong>
             </p>
@@ -58,7 +58,7 @@ export default function CompressEditor({ url, width, height, publicId, bytes }: 
             style={{ width, height }}
             itemOne={
               <ReactCompareSliderImage
-                className="bg-dark-11"
+                className="bg-dark-10"
                 src={url}
                 width={width}
                 height={height}
@@ -67,7 +67,7 @@ export default function CompressEditor({ url, width, height, publicId, bytes }: 
             }
             itemTwo={
               <ReactCompareSliderImage
-                className="bg-dark-11"
+                className="bg-dark-10"
                 src={cloudinary.image(publicId).quality(quality).format(format).toURL()}
                 width={width}
                 height={height}
