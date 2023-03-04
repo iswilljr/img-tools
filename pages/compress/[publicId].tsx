@@ -3,7 +3,7 @@ import { useDebounce } from 'use-debounce';
 import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
 import { useImageSize } from '@/hooks/use-image-size';
 import { compressImage } from '@/utils/compress-image';
-import { generator } from '@/utils/cloudinary';
+import { generator } from '@/utils/image-generator';
 import { compressTool } from '@/utils/tools';
 import { useSubmit } from '@/hooks/use-submit';
 import { Select } from '@/components/Inputs/Select';

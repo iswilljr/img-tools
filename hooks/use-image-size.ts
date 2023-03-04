@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { generator } from '@/utils/cloudinary';
+import { generator } from '@/utils/image-generator';
 
 interface ImageSizeOptions {
   initialSize: number;
