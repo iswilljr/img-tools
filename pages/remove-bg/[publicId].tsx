@@ -1,5 +1,5 @@
 import axios from 'redaxios';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { IconBug, IconDownload, IconLoader2, IconUpload } from '@tabler/icons-react';
 import { CloudinaryImage } from '@cloudinary/url-gen';
 import { backgroundRemoval } from '@cloudinary/url-gen/actions/effect';
@@ -10,18 +10,14 @@ import { Button } from '@/components/Button';
 import { downloadImage } from '@/utils/download-image';
 import { upload } from '@/utils/upload';
 import type { GetServerSideProps } from 'next';
+import { useTries } from '@/hooks/use-tries';
 
 interface RemoveBackgroundEditorProps extends BaseProps {
   originalUrl: string;
 }
 
-const MAX_TRIES = 5;
-
 export default function RemoveBackgroundEditor({ url, originalUrl, publicId }: RemoveBackgroundEditorProps) {
   const [uploading, setUploading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [tries, setTries] = useState(1);
 
   const handleSubmit = useSubmit({
     publicId,
@@ -34,33 +30,11 @@ export default function RemoveBackgroundEditor({ url, originalUrl, publicId }: R
     onFinish: () => setUploading(false),
   });
 
-  useEffect(() => {
-    if (tries >= MAX_TRIES) {
-      setLoading(false);
-      return;
-    }
-
-    let timeout: NodeJS.Timeout;
-
-    axios
-      .get(`${url}&try=${tries}`)
-      .then(() => setTries(MAX_TRIES))
-      .catch(() => {
-        timeout = setTimeout(
-          () =>
-            setTries(tries => {
-              const value = ++tries;
-              if (value >= MAX_TRIES) setError('Could not remove background');
-              return value;
-            }),
-          3000
-        );
-      });
-
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [url, tries]);
+  const { loading, error } = useTries({
+    errorMessage: 'Could not remove background',
+    maxTries: 5,
+    tryFn: tries => axios.get(`${url}&try=${tries}`),
+  });
 
   return (
     <section className="absolute inset-0 flex h-full w-full items-center justify-center overflow-x-hidden p-6 sm:relative sm:h-[calc(100vh-64px)]">

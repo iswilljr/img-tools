@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import ReactCrop, { type Crop } from 'react-image-crop';
 import { cropImage } from '@/utils/crop-image';
@@ -7,26 +7,14 @@ import { Input } from '@/components/Inputs/Input';
 import { Editor } from '@/components/Tool/Editor';
 import { useSubmit } from '@/hooks/use-submit';
 import 'react-image-crop/dist/ReactCrop.css';
+import { useCropHandler } from '@/hooks/use-crop-handler';
 
 export default function CropEditor({ url, width, height, publicId }: BaseProps) {
   const imgRef = useRef<HTMLImageElement>(null);
   const [cropping, setCropping] = useState(false);
   const [crop, setCrop] = useState<Crop>({ width, height, unit: 'px', x: 0, y: 0 });
 
-  const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const id = e.target.id;
-      const value = e.target.valueAsNumber;
-
-      if (Number.isNaN(value)) return;
-
-      const maxValue = id === 'width' || id === 'x' ? width : height;
-      const nextValue = value >= 0 && value <= maxValue ? value : value > maxValue ? maxValue : 0;
-
-      setCrop(crop => ({ ...crop, [id]: Math.round(nextValue) }));
-    },
-    [width, height]
-  );
+  const handleChange = useCropHandler({ width, height, onChange: setCrop });
 
   const handleSubmit = useSubmit({
     publicId,

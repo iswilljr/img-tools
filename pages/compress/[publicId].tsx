@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
-import { Cloudinary } from '@cloudinary/url-gen';
+import { useState } from 'react';
 import { useDebounce } from 'use-debounce';
 import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
+import { useImageSize } from '@/hooks/use-image-size';
 import { compressImage } from '@/utils/compress-image';
+import { generator } from '@/utils/cloudinary';
 import { compressTool } from '@/utils/tools';
 import { useSubmit } from '@/hooks/use-submit';
 import { Select } from '@/components/Inputs/Select';
@@ -12,14 +13,13 @@ import { Range } from '@/components/Inputs/Range';
 type Format = (typeof formats)[number];
 
 const formats = ['png', 'jpg', 'webp', 'avif'] as const;
-const cloudinary = new Cloudinary({ cloud: { cloudName: process.env.NEXT_PUBLIC_CLOUD_NAME } });
 
 export default function CompressEditor({ url, width, height, publicId, bytes }: BaseProps) {
   const [compressing, setCompressing] = useState(false);
   const [qualityValue, setQuality] = useState(80);
   const [quality] = useDebounce(qualityValue, 300);
   const [format, setFormat] = useState<Format>('png');
-  const [outputSize, setOutputSize] = useState(bytes);
+  const outputSize = useImageSize({ initialSize: bytes, publicId, quality, format });
 
   const handleSubmit = useSubmit({
     publicId,
@@ -31,12 +31,6 @@ export default function CompressEditor({ url, width, height, publicId, bytes }: 
     onSubmit: () => compressImage({ publicId, quality: qualityValue, format }),
     onFinish: () => setCompressing(false),
   });
-
-  useEffect(() => {
-    fetch(cloudinary.image(publicId).quality(quality).format(format).toURL())
-      .then(res => res.blob())
-      .then(blob => setOutputSize(blob.size));
-  }, [format, publicId, quality]);
 
   return (
     <Editor
@@ -68,7 +62,7 @@ export default function CompressEditor({ url, width, height, publicId, bytes }: 
             itemTwo={
               <ReactCompareSliderImage
                 className="bg-dark-10"
-                src={cloudinary.image(publicId).quality(quality).format(format).toURL()}
+                src={generator.image(publicId).quality(quality).format(format).toURL()}
                 width={width}
                 height={height}
                 alt="Compressed"
