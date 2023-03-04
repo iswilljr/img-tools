@@ -37,7 +37,7 @@ export default function RemoveBackgroundEditor({ url, originalUrl, publicId }: R
   });
 
   return (
-    <section className="absolute inset-0 flex h-full w-full items-center justify-center overflow-x-hidden p-6 sm:relative sm:h-[calc(100vh-64px)]">
+    <section className="absolute inset-0 flex h-full w-full items-center justify-center overflow-x-hidden p-6 sm:relative">
       {loading && (
         <div className="flex flex-col items-center justify-center">
           <span className="animate-spin">
