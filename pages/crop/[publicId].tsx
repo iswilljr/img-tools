@@ -79,4 +79,4 @@ export default function CropEditor({ url, width, height, publicId }: BaseProps) 
   );
 }
 
-export { defaultGetServerSideProps as getServerSideProps } from 'utils/get-resource';
+export { defaultGetServerSideProps as getServerSideProps } from '@/utils/get-resource';

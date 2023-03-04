@@ -146,4 +146,4 @@ export default function ResizeEditor({ url, width: initialWidth, height: initial
   );
 }
 
-export { defaultGetServerSideProps as getServerSideProps } from 'utils/get-resource';
+export { defaultGetServerSideProps as getServerSideProps } from '@/utils/get-resource';

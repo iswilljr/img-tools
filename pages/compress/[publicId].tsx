@@ -100,4 +100,4 @@ export default function CompressEditor({ url, width, height, publicId, bytes }: 
   );
 }
 
-export { defaultGetServerSideProps as getServerSideProps } from 'utils/get-resource';
+export { defaultGetServerSideProps as getServerSideProps } from '@/utils/get-resource';

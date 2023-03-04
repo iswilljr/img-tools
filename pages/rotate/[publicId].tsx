@@ -96,4 +96,4 @@ export default function RotateEditor({ url, width, height, publicId }: BaseProps
   );
 }
 
-export { defaultGetServerSideProps as getServerSideProps } from 'utils/get-resource';
+export { defaultGetServerSideProps as getServerSideProps } from '@/utils/get-resource';
