@@ -16,6 +16,8 @@ interface RemoveBackgroundEditorProps extends BaseProps {
   originalUrl: string;
 }
 
+const BACKGROUND_REMOVAL_IN_PROCESS_STATUS_CODE = 423;
+
 export default function RemoveBackgroundEditor({ url, originalUrl, publicId }: RemoveBackgroundEditorProps) {
   const [uploading, setUploading] = useState(false);
 
@@ -31,13 +33,13 @@ export default function RemoveBackgroundEditor({ url, originalUrl, publicId }: R
   });
 
   const { loading, error } = useTries({
-    errorMessage: 'Could not remove background',
     maxTries: 5,
     tryFn: tries => axios.get(`${url}&try=${tries}`),
+    retry: res => res.status === BACKGROUND_REMOVAL_IN_PROCESS_STATUS_CODE,
   });
 
   return (
-    <section className="flex h-full w-full items-center justify-center overflow-x-hidden p-6 sm:min-h-[calc(100vh-64px)]">
+    <section className="flex h-full min-h-[calc(100vh-64px)] w-full items-center justify-center overflow-x-hidden p-6">
       {loading && (
         <div className="flex flex-col items-center justify-center">
           <span className="animate-spin">
@@ -70,9 +72,9 @@ export default function RemoveBackgroundEditor({ url, originalUrl, publicId }: R
       )}
 
       {!loading && error && (
-        <div className="grid place-items-center">
+        <div className="grid place-items-center text-center">
           <IconBug size={150} />
-          <h2 className="text-4xl font-bold">{error}</h2>
+          <h2 className="text-4xl font-bold">Could not remove background</h2>
           <p className="mt-2 text-xl">Looks like we ran out of credits to remove image backgrounds</p>
         </div>
       )}

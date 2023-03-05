@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 
-interface Tries {
-  tryFn: (tries: number) => Promise<any>;
+interface Tries<T> {
+  tryFn: (tries: number) => Promise<T>;
+  retry: (arg: T) => boolean;
   maxTries: number;
-  errorMessage: string;
 }
 
-export function useTries({ tryFn, maxTries, errorMessage }: Tries) {
-  const [error, setError] = useState<string | null>(null);
+export function useTries<T>({ tryFn, retry, maxTries }: Tries<T>) {
+  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [tries, setTries] = useState(1);
 
@@ -21,12 +21,18 @@ export function useTries({ tryFn, maxTries, errorMessage }: Tries) {
 
     tryFn(tries)
       .then(() => setTries(maxTries))
-      .catch(() => {
+      .catch(res => {
+        const shouldRetry = retry(res);
+        if (!shouldRetry) {
+          setError(true);
+          return setTries(maxTries);
+        }
+
         timeout = setTimeout(
           () =>
             setTries(tries => {
               const value = ++tries;
-              if (value >= maxTries) setError(errorMessage);
+              if (value >= maxTries) setError(true);
               return value;
             }),
           3000
@@ -37,7 +43,7 @@ export function useTries({ tryFn, maxTries, errorMessage }: Tries) {
       clearTimeout(timeout);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [maxTries, errorMessage, tries]);
+  }, [maxTries, tries]);
 
   return { loading, error };
 }
