@@ -15,7 +15,7 @@ export function Header() {
             key={section.title}
             className="group relative flex items-center justify-center last:!inline-flex even:hidden xs:even:inline-flex"
           >
-            <span className="pointer-events-none absolute z-10 w-max translate-y-14 transform rounded-md bg-primary-6 py-1 px-2 text-left opacity-0 duration-200 group-hover:translate-y-10 group-hover:opacity-100">
+            <span className="pointer-events-none absolute z-10 w-max translate-y-14 transform rounded-md bg-primary-6 px-2 py-1 text-left opacity-0 duration-200 group-hover:translate-y-10 group-hover:opacity-100">
               {section.title}
             </span>
             <Link

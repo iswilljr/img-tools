@@ -5,7 +5,7 @@ import { FormButtons, type FormButtonsProps } from './FormButtons';
 import { Guide } from '../Guide';
 import type { ToolProps } from './Tool';
 
-interface EditorProps extends React.FormHTMLAttributes<HTMLFormElement> {
+interface EditorProps extends Omit<React.FormHTMLAttributes<HTMLFormElement>, 'content'> {
   formButtonProps: FormButtonsProps;
   content: React.ReactNode;
   tool: ToolProps;
