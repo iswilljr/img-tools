@@ -5,13 +5,21 @@ const eslintConfig = {
     es2021: true,
     node: true,
   },
-  extends: ['standard-with-typescript', 'next/core-web-vitals', 'plugin:prettier/recommended'],
+  extends: ['next/core-web-vitals', 'standard-with-typescript', 'plugin:prettier/recommended'],
   overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: 'tsconfig.json',
+    project: ['tsconfig.json'],
   },
+  ignorePatterns: [
+    '.eslintrc.js',
+    'jest.config.js',
+    'jest.setup.js',
+    'next.config.js',
+    'postcss.config.js',
+    'tailwind.config.js',
+  ],
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/strict-boolean-expressions': 'off',
