@@ -9,7 +9,7 @@ const prettierConfig = {
   useTabs: false,
   tabWidth: 2,
   trailingComma: 'es5',
-  plugins: [require('prettier-plugin-tailwindcss')],
+  plugins: ['prettier-plugin-tailwindcss'],
 };
 
 module.exports = prettierConfig;
